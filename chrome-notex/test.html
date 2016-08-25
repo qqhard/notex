@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="mystyles.css" />
+    <style>
+        .aaa:hover {
+            color:red
+        }
+    </style>
+</head>
+<body>
+<!--<div class="index">-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title">-->
+            <!--<a href="/2016/05/08/KeePassX/">推荐几个密码管理软件</a>-->
+        <!--</div>-->
+        <!--<div class="post-meta">May 08, 2016<span class="post-tags"><span>工具</span></span></div>-->
+        <!--<div class="post-content"><p>LastPass、KeePass、1Password，个人喜好程度由低到高。</p></div>-->
+        <!--<p class="readmore"><a href="/2016/05/08/KeePassX/">Read More...</a></p>-->
+    <!--</div>-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title"><a href="/2016/01/05/Regexes/">编程语言中的正则表达式</a></div>-->
+        <!--<div class="post-meta">Jan 05, 2016<span class="post-tags"><span>高级编程语言特性</span></span></div>-->
+        <!--<div class="post-content"><p>正则表达式（Regular Expression）本是一个理论计算机科学中的概念，在1950年代Stephen-->
+            <!--Kleene为了形式化地描述正则语言而提出它。今天主要介绍一下在编程语言中经常提到的“正则表达式”，它们的概念是不同的。</p></div>-->
+        <!--<p class="readmore"><a href="/2016/01/05/Regexes/">Read More...</a></p></div>-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title"><a href="/2016/01/04/sed/">sed：可能是地球上最好用的文本替换工具</a></div>-->
+        <!--<div class="post-meta">Jan 04, 2016<span class="post-tags"><span>Linux</span></span></div>-->
+        <!--<div class="post-content"><p>sed也是Linux/Unix下的一个文本处理工具（上次介绍了<a-->
+                <!--href="http://blog.abandonzhang.me/2015/12/07/awk/">awk</a>），全称为stream editor，由Bell-->
+            <!--Labs在1974年发布。sed在它擅长的方面实现起来更加快速和简单，因此直到今天它还是一个很受欢迎的工具。</p></div>-->
+        <!--<p class="readmore"><a href="/2016/01/04/sed/">Read More...</a></p></div>-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title"><a href="/2015/12/07/awk/">awk：可能是地球上最好用的文本处理工具</a></div>-->
+        <!--<div class="post-meta">Dec 07, 2015<span class="post-tags"><span>Linux</span></span></div>-->
+        <!--<div class="post-content"><p>awk是Linux/Unix环境中的一个强大的文本处理工具，由Bell Labs在1977年发布，名字取自它的三位创造者Alfred Aho、Peter-->
+            <!--Weinberger和Brian Kernighan姓氏的首字母。作为一个已经有38年历史的工具，awk如今在文本处理中的地位仍然不可动摇，可称得上是一件上古神器了。</p></div>-->
+        <!--<p class="readmore"><a href="/2015/12/07/awk/">Read More...</a></p></div>-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title"><a href="/2015/11/09/Password/">如何正确存储用户密码</a></div>-->
+        <!--<div class="post-meta">Nov 09, 2015<span class="post-tags"><span>信息安全</span></span></div>-->
+        <!--<div class="post-content"><p>-->
+            <!--密码的用处在于保护用户的隐私，防止他人登录到用户的系统中获取用户的信息或做一些其他不(xiu)好(xiu)的事情。应用程序肯定需要存储用户的密码以便在用户登录时判断用户输入的密码是否正确。</p></div>-->
+        <!--<p class="readmore"><a href="/2015/11/09/Password/">Read More...</a></p></div>-->
+    <!--<div class="post-items">-->
+        <!--<div class="post-title"><a href="/2015/10/16/Closure/">编程语言中的闭包</a></div>-->
+        <!--<div class="post-meta">Oct 16, 2015<span class="post-tags"><span>高级编程语言特性</span></span></div>-->
+        <!--<div class="post-content"><p>-->
+            <!--闭包（Closure）本身其实是一个数学概念，表示一个特殊的集合（Set），该集合中任意元素间的运算结果仍然是这个集合中的元素。而我们码农常常也会谈论编程语言中的一个“闭包”，其实是词法闭包（Lexical-->
+            <!--Closure），用来支持匿名函数和嵌套定义函数这些特性。</p></div>-->
+        <!--<p class="readmore"><a href="/2015/10/16/Closure/">Read More...</a></p></div>-->
+<!--</div>-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+
+    function htmlNote(note) {
+        return $("\
+            <div class='post-items'>\
+                <div class='post-title'>\
+                    <a href='/2016/05/08/KeePassX/'>推荐几个密码管理软件</a>\
+                </div>\
+                <div class='post-meta'>May 08, 2016<span class='post-tags'><span>工具</span></span></div>\
+                <div class='post-content'><p>LastPass、KeePass、1Password，个人喜好程度由低到高。</p></div>\
+                <p class='readmore'>\
+                  <span class='aaa'><img style='height:20px' src=\"images/edit.png\"></span>\
+                </p>\
+            </div>\
+        ");
+    }
+
+    function show(notes) {
+        var newNodes = $("<div class='index'></div>");
+        for(var i=0;i<notes.length;i++){
+            newNodes.append(htmlNote(notes[i]));
+        }
+        console.log(notes.length);
+        console.log(newNodes);
+        $("body").append(newNodes);
+    }
+
+    show([3,4,5]);
+
+</script>
+</body>
+</html>

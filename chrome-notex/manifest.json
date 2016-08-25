@@ -1,0 +1,27 @@
+{
+  "name": "NoteX",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "note x",
+  "background": {
+    "scripts": ["bower_components/jquery/dist/jquery.min.js","background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.png" ,
+    "default_title": "NoteX",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["mystyles.css"],
+      "js": ["bower_components/jquery/dist/jquery.min.js", "page.js"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "*://*.baidu.com/"
+  ]
+}

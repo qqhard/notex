@@ -1,0 +1,10 @@
+.idea/
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+target/
+.mvn/
+.settings/
+.classpath
+.project
+bower_components/

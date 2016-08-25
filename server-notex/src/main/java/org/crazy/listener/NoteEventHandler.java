@@ -24,11 +24,13 @@ public class NoteEventHandler {
 	public void handleNoteDelete(Note note) {
 		System.out.println("##########delete note#############");
 		System.out.println(note);
+		searchService.removeNote(note);
 	}
 	
 	@HandleAfterSave
 	public void handleNoteSave(Note note){
-		System.out.println("##########delete note#############");
+		System.out.println("##########update note#############");
 		System.out.println(note);
+		searchService.updateNote(note);
 	}
 }	

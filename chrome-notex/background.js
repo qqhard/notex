@@ -1,5 +1,7 @@
 
-var TYPE_TXT = 'TXT';
+var TYPE_PUSH = 'PUSH';
+var TYPE_REMOVE = 'REMOVE';
+var TYPE_EDIT = 'EDIT';
 var userId = "1";
 
 function textParse(text) {
@@ -27,6 +29,17 @@ function pushNote(text, title, url) {
     })
 }
 
+function removeNote(noteId) {
+    $.ajax({
+        url:"http://localhost:8080/note/"+noteId,
+        type: "DELETE",
+        contentType: "application/json",
+        success: function (data) {
+            
+        }
+    })
+}
+
 function startListeners() {
 
     chrome.webRequest.onBeforeRequest.addListener(function (details) {
@@ -43,8 +56,13 @@ function startListeners() {
     chrome.runtime.onMessage.addListener(function (message,sender,sendResponse) {
         switch(message.type)
         {
-            case TYPE_TXT:
+            case TYPE_PUSH:
                 pushNote(message.value, sender.tab.title, sender.tab.url);
+                break;
+            case TYPE_REMOVE:
+                removeNote(message.value)
+                break;
+            case TYPE_EDIT:
                 break;
             default:
                 console.log('exception message:');

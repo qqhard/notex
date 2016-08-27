@@ -1,0 +1,20 @@
+{
+  "name": "web-notex",
+  "homepage": "https://github.com/qqhard/notex",
+  "authors": [
+    "hard <453824417@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "wangEditor": "^2.1.18"
+  }
+}

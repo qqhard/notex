@@ -8,3 +8,6 @@ target/
 .classpath
 .project
 bower_components/
+build/
+node_modules/
+web-notex/index.html

@@ -1,9 +1,9 @@
 /**
- * Created by hard on 16-8-27.
+ * Created by hard on 16-8-30.
  */
 import * as types from '../constant/types';
 
-const data = (state = {}, action) => {
+const notes = (state = {}, action) => {
     switch (action.type) {
         case types.GET_NOTES_SUCCESS:
             return {
@@ -14,4 +14,4 @@ const data = (state = {}, action) => {
     }
 }
 
-export default data;
+export default notes;

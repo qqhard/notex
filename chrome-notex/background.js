@@ -2,7 +2,15 @@
 var TYPE_PUSH = 'PUSH';
 var TYPE_REMOVE = 'REMOVE';
 var TYPE_EDIT = 'EDIT';
-var userId = "1";
+var TYPE_LOGIN = 'LOGIN';
+var TYPE_USERNAME = 'USERNAME';
+var TYPE_REGISTER = 'REGISTER';
+var TYPE_LOGOUT = 'LOGOUT';
+var STATUS_OK = 1;
+var STATUS_FAIL = 0;
+
+var userId = null;
+var gUsername = null;
 
 function textParse(text) {
     return text.replace(/(^\s*)|(\s*$)/g, "");
@@ -40,6 +48,24 @@ function removeNote(noteId) {
     })
 }
 
+function login(username,password,sendResponse) {
+    console.log('login '+username+""+password);
+    sendResponse(STATUS_OK);
+    userId = "1";
+    gUsername = username;
+}
+
+function register(username,password,rePassword,sendResponse) {
+    console.log(username);
+    sendResponse(STATUS_OK);
+}
+
+function logout(sendResponse) {
+    gUsername = null;
+    sendResponse(STATUS_OK);
+}
+
+
 function startListeners() {
 
     chrome.webRequest.onBeforeRequest.addListener(function (details) {
@@ -60,9 +86,21 @@ function startListeners() {
                 pushNote(message.value, sender.tab.title, sender.tab.url);
                 break;
             case TYPE_REMOVE:
-                removeNote(message.value)
+                removeNote(message.value);
                 break;
             case TYPE_EDIT:
+                break;
+            case TYPE_LOGIN:
+                login(message.username,message.password,sendResponse);
+                break;
+            case TYPE_REGISTER:
+                register(message.username,message.password,message.rePassword,sendResponse);
+                break;
+            case TYPE_USERNAME:
+                sendResponse(gUsername);
+                break;
+            case TYPE_LOGOUT:
+                logout(sendResponse);
                 break;
             default:
                 console.log('exception message:');

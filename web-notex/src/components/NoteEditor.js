@@ -146,6 +146,20 @@ class NoteEditor extends React.Component {
     }
     componentDidMount() {
         this.props.getNotes();
+        this.props.getNote("57c4c0590002860e65b2950a");
+        var note = {
+            url:'www.xiaoruo.com',
+            title:'测试post',
+            text:'hello world',
+            tags: '',
+            time: Date.parse(new Date()),
+            userId: 100,
+        }
+        this.props.postNote(note);
+        note.tags = '修改了';
+        this.props.putNote(note);
+        console.log(this.state.note);
+        this.props.deleteNote("57c4c0590002860e65b2950a");
         eve.showMd();
         eve.translateMd();
     }

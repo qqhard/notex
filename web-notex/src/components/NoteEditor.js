@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { browserHistory } from 'react-router';
+import styles from './defaultStyle';
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -13,7 +14,12 @@ class NoteEditor extends React.Component {
     render() {
         return (
             <div>
-                notex
+                <div style={styles.menu}>
+                    <img style={styles.logo} src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
+                    <a href="javascript:;"></a>
+                    <div className='iconfont icon-tianjia'></div>
+                    <div className='iconfont icon-sousuo'></div>
+                </div>
             </div>
         )
     }

@@ -26,8 +26,8 @@ import com.aliyun.opensearch.object.KeyTypeEnum;
 @Service
 public class SearchService {
 	private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
-	private String accesskey = "bsR8ExAjBhVoCJpz";
-	private String secret = "AO1L9hnVnDnELDqE2CHYKYXcN9b9RR";
+	private String accesskey = "BEm8QbEYCBnNab0h";
+	private String secret = "UbCBKoEFeA2YPavT3CTjSUSRCNNlR5";
 	private String appName = "notex";
 	private Map<String, Object> opts = new HashMap<String, Object>();
 	private String host = "http://opensearch-cn-beijing.aliyuncs.com";

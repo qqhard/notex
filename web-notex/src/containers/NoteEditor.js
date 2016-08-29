@@ -3,7 +3,7 @@
  */
 import { connect } from 'react-redux';
 import NoteEditor from '../components/NoteEditor';
-
+import { getNotes } from '../actions/data';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,9 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUsername: ()=>dispatch(function () {
-
-        })
+        getNotes: ()=>dispatch(getNotes())
     }
 }
 

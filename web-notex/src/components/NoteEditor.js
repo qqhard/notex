@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { getNotes } from '../actions/data'
+
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -144,8 +144,7 @@ class NoteEditor extends React.Component {
         )
     }
     componentDidMount() {
-        // console.log(getNotes);
-        getNotes();
+        this.props.getNotes();
     }
 }
 

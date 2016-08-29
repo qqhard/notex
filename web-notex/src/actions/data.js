@@ -6,7 +6,9 @@ import * as urls from '../constant/urls';
 import { browserHistory } from 'react-router';
 
 export const getNotes = () => {
+    console.log('1111');
     return (dispatch)=> {
+        console.log('hehe');
         $.get(urls.GET_NOTES, (data)=> {
             console.log(data);
             dispatch({
@@ -14,6 +16,7 @@ export const getNotes = () => {
                 notes: data
             })
         }).error((e)=> {
+            console.log('hehehe');
             dispatch({
                 type: types.GET_DATA_FAIL
             });

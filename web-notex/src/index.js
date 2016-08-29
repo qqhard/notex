@@ -7,7 +7,7 @@ import notexApp from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import App from './app';
-import NoteEditor from './components/NoteEditor';
+import NoteEditor from './containers/NoteEditor';
 
 const loggerMiddleware = createLogger();
 
@@ -22,7 +22,7 @@ const store = createStore(
 
 render((
     <Provider store={store}>
-        <Router history={hashHistory}>
+        <Router history={browserHistory}>
             <Route path="/" component={App}>
                 <IndexRoute component={NoteEditor} />
                 <Route path="notes.html" component={NoteEditor}/>

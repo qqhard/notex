@@ -2,7 +2,6 @@
 	padding: 0;
 	margin: 0;
 	text-decoration: none;
-	list-style: none;
 }
 .box {
 	box-sizing: border-box;
@@ -65,6 +64,7 @@
 	overflow: scroll;
 	display: flex;
 	flex-direction: column;
+	list-style: none;
 }
 .list-li {
 	width: 100%;
@@ -133,12 +133,39 @@
 	flex-direction: row;
 }
 .md-title {
-	width: 600px;
+	width: 700px;
 	height: 50px;
 	font-size: 30px;
 	border: none;
 	border-bottom: 2px solid #672b00;
 	color: #672b00;
+	margin-left: 50px;
+	outline: none;
+	resize: none;
+}
+.md-head .iconfont {
+	margin-left: 20px;
+}
+.textarea {
+	border: none;
+	width: 850px;
+	outline: none;
+	font-size: 18px;
+	margin-top: -50px;
+	resize: none;
+}
+
+/*预览*/
+
+.yulan {
+	box-sizing: border-box;
+	padding: 40px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 907px;
+	background-color: #7bb7fa;
 }
 
 /*js*/
@@ -146,4 +173,6 @@
 .none {
 	display: none;
 }
-.
+.block {
+	display: block;
+}

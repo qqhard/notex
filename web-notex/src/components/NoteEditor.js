@@ -119,9 +119,9 @@ class NoteEditor extends React.Component {
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
                     <a href="javascript:;"></a>
-                    <div className='iconfont icon-weidenglu'></div>
-                    <div className='iconfont icon-tianjia'></div>
-                    <div className='iconfont icon-sousuo'></div>
+                    <a href='javascript:;' className='iconfont icon-weidenglu'></a>
+                    <a href='javascript:;' className='iconfont icon-tianjia'></a>
+                    <a href='javascript:;' className='iconfont icon-sousuo'></a>
                 </div>
                 <div className='list' style={styles.height}>
                     <h2 className='list-title'>猿笔记</h2>
@@ -133,25 +133,59 @@ class NoteEditor extends React.Component {
                 <div className='content'>
                     <div className='md-head'>
                         <input className='md-title' />
-                        <div className='iconfont icon-yulan'></div>
-                        <div className='iconfont icon-baocun'></div>
+                        <a href='javascript:;' id='J_ShowMd' className='iconfont icon-yulan'></a>
+                        <a href='javascript:;' className='iconfont icon-baocun'></a>
                     </div>
-                    {/*<div>
-                        <textarea></textarea>
-                    </div>*/}
+                    <textarea className='textarea' id='J_Mark' style={styles.heights}></textarea>
                 </div>
+                <div className='yulan mdown none' id='J_Right'></div>
             </div>
         )
     }
     componentDidMount() {
-        // console.log(getNotes);
-        getNotes();
+        eve.showMd();
+        eve.translateMd();
+    }
+}
+
+let eve = {
+    showMd: function() {
+        $('#J_ShowMd').click(function(e) {
+            if($('#J_Right').hasClass('none')) {
+                $('#J_Right').removeClass('none');
+                $('#J_Right').addClass('block');
+            } else {
+                $('#J_Right').removeClass('block');
+                $('#J_Right').addClass('none');
+            }
+        })
+    },
+    highLightCode: function() {
+        var codeBlock =document.querySelectorAll('code');
+        for(var i = codeBlock.length-1;i>=0;i--){
+            hljs.highlightBlock(codeBlock[i].parentNode);
+        }
+    },
+    translateMd: function() {
+        let that = this;
+        this.highLightCode();
+        $('#J_Mark').keyup(function(e) {
+            const content = $('#J_Mark').val();
+            let right = $('#J_Right');
+            let hCon = marked(content);
+            console.log(right)
+            right.html(hCon);
+            that.highLightCode();
+        })
     }
 }
 
 let styles = {
     height: {
-        height: document.documentElement.clientHeight || document.body.clientHeight
+        height: document.documentElement.clientHeight || document.body.clientHeight + 'px'
+    },
+    heights: {
+        height: (document.documentElement.clientHeight || document.body.clientHeight) - 100 + 'px'
     }
 }
 export default NoteEditor;

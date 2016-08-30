@@ -29,14 +29,14 @@ public class TestUserRepository {
     public void testFind(){
         List<User> list  = userRepository.findAll();
         for(User user: list){
-            System.out.println(user.getUserId()+""+user.getUsername());
+            System.out.println(user.getUserId()+" "+user.getUsername() + " " + user.getPassword());
         }
         
     }
     
     @Test
     public void testDelete(){
-        String userId = "57c41a16c2cc37097b7b999b";
+        String userId = "57c57bb16b1dc120978f3b78";
         userRepository.delete(userId);
     }
     

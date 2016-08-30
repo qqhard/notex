@@ -46,7 +46,7 @@ public class NoteAction {
 	}
 	
 	@RequestMapping(value="/note/{noteId}", method=RequestMethod.DELETE)
-	public Object put(@PathVariable("noteId") String noteId){
+	public Object delete(@PathVariable("noteId") String noteId){
 		noteRepository.delete(noteId);
 		Note note = new Note();
 		note.setNoteId(noteId);

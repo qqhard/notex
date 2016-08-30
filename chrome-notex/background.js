@@ -38,7 +38,18 @@ $.ajax({
     success: function (data) {
         console.log(data);
     }
-})
+});
+
+setTimeout(function () {
+    $.ajax({
+        url:"http://localhost:8080/note/"+"1",
+        type: "DELETE",
+        contentType: "application/json",
+        success: function (data) {
+            console.log(data);
+        }
+    });
+},500);
 
 //test
 

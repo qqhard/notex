@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
     	http
     		.authorizeRequests()
-    			.antMatchers("/user/username","/note/*","/note").
+    			.antMatchers("/user/username","/note/*","/note","/query").
     			permitAll()
     			.anyRequest()
     			.authenticated();

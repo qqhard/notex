@@ -11,143 +11,88 @@ class NoteEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            value: 'qqq'
         }
     }
+    handleChangeTitle(event) {
+        this.props.editTitle(event.target.value);
+    }
+    handleChangeText(event) {
+        this.props.editText(event.target.value);
+    }
+
+    componentWillReceiveProps(nextProps){
+        
+    }
+
     render() {
-        let list = [
-            <li className='list-li' key='1'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='2'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='3'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='4'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='5'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='6'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='7'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='8'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='9'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>,
-            <li className='list-li' key='10'>
-                <a href='javascript:;'>
-                    <h3 className='name'>React 入门实例教程</h3>
-                    <p className='list-time'>2016年08月27日 20:30:45</p>
-                    <p className='list-content'>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。</p>
-                    <div className='delete'>
-                        <span className='iconfont icon-xiao10'></span>
-                    </div>
-                </a>
-            </li>
-        ];
+        let list = [];
+        if (!!this.props.notes){
+            list = this.props.notes.map((val,index)=>{
+                return (
+                    <li className='list-li' key={index}>
+                        <a href='javascript:;'>
+                            <h3 className='name'>{val.title}</h3>
+                            <p className='list-time'>{val.time}</p>
+                            <p className='list-content'>{val.text}</p>
+                            <div className='delete'>
+                                <span className='iconfont icon-xiao10'></span>
+                            </div>
+                            <input id='J_NoteId' type='hidden' value={index+1}/>
+                        </a>
+                    </li>
+                );
+            });
+        }
+
+        let firstOne = {};
+        let length = '';
+        if (!!this.props.notes){
+            length = this.props.notes.length;
+        }
         return (
             <div className='box'>
+                <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
                     <a href="javascript:;"></a>
                     <a href='javascript:;' className='iconfont icon-weidenglu'></a>
-                    <a href='javascript:;' className='iconfont icon-tianjia'></a>
-                    <a href='javascript:;' className='iconfont icon-sousuo'></a>
+                    <a href='javascript:;' id='J_Add' className='iconfont icon-tianjia'></a>
+                    <a href='javascript:;' id='J_Search' className='iconfont icon-sousuo'></a>
+                    <div id='J_SearchInput' className='search none'>
+                        <input className='search-input' />
+                    </div>
                 </div>
                 <div className='list' style={styles.height}>
                     <h2 className='list-title'>猿笔记</h2>
-                    <p className='num'><span>3</span>条笔记</p>
+                    <p className='num'><span>{length}</span>条笔记</p>
                     <ul id='J_List' className='list-box'>
                         {list}
                     </ul>
                 </div>
                 <div className='content'>
                     <div className='md-head'>
-                        <input className='md-title' />
+                        <input id='J_Title' className='md-title'
+                            type='text'
+                            placeholder='请输入标题'
+                            value={this.props.edit.title||''}
+                            onChange={e=>this.handleChangeTitle(e)}
+                        />
                         <a href='javascript:;' id='J_ShowMd' className='iconfont icon-yulan'></a>
-                        <a href='javascript:;' className='iconfont icon-baocun'></a>
+                        <a href='javascript:;' id='J_Save' className='iconfont icon-baocun'></a>
                     </div>
-                    <textarea className='textarea' id='J_Mark' style={styles.heights}></textarea>
+                    <textarea className='textarea' id='J_Mark' placeholder='请输入内容' style={styles.heights} value={this.props.edit.text||''}
+                        onChange={e=>this.handleChangeText(e)}
+                    ></textarea>
                 </div>
                 <div className='yulan mdown none' id='J_Right'></div>
             </div>
         )
     }
     componentDidMount() {
-        this.props.getNotes();
-        this.props.getNote("57c4c0590002860e65b2950a");
-        var note = {
+        console.log('test');
+        // this.props.editTitle();
+        /*var note = {
             url:'www.xiaoruo.com',
             title:'测试post',
             text:'hello world',
@@ -159,18 +104,29 @@ class NoteEditor extends React.Component {
         note.tags = '修改了';
         this.props.putNote(note);
         console.log(this.state.note);
-        this.props.deleteNote("57c4c0590002860e65b2950a");
+        this.props.deleteNote("57c4c0590002860e65b2950a");*/
+        eve.getNotes(this.props);
         eve.showMd();
         eve.translateMd();
+        eve.showNote();
+        eve.newNote();
+        eve.addNote(this.props);
+        eve.searchNode(this.props);
     }
 }
 
 let eve = {
     showMd: function() {
+        let _this = this;
         $('#J_ShowMd').click(function(e) {
             if($('#J_Right').hasClass('none')) {
                 $('#J_Right').removeClass('none');
                 $('#J_Right').addClass('block');
+                const content = $('#J_Mark').val();
+                let right = $('#J_Right');
+                let hCon = marked(content);
+                right.html(hCon);
+                _this.highLightCode();
             } else {
                 $('#J_Right').removeClass('block');
                 $('#J_Right').addClass('none');
@@ -190,9 +146,87 @@ let eve = {
             const content = $('#J_Mark').val();
             let right = $('#J_Right');
             let hCon = marked(content);
-            console.log(right)
             right.html(hCon);
             that.highLightCode();
+        })
+    },
+    getNotes: function(props) {
+        props.getNotes();
+    },
+    showNote: function() {
+        let _this = this;
+        $('#J_List').click(function(e) {
+            let target = e.target.tagName.toLowerCase();
+            let child = {};
+            if(target === 'a') {
+                child = e.target;
+            } else if(target === 'p' || target === 'h3') {
+                child = e.target.parentNode;
+            } else if(target === 'li') {
+                child = e.target.children[0];
+            }
+            let title = child.children[0].innerHTML;
+            let text = child.children[2].innerHTML;
+            $('#J_Title').val(title);
+            $('#J_Mark').val(text);
+            const content = $('#J_Mark').val();
+            let right = $('#J_Right');
+            let hCon = marked(content);
+            right.html(hCon);
+            _this.highLightCode();
+            console.log(child.children[4].value);
+            $('#J_AAC').val(child.children[4].value);
+
+        })
+    },
+    newNote: function() {
+        $('#J_Add').click(function() {
+            $('#J_AAC').val('1');
+            $('#J_Title').val('');
+            $('#J_Mark').val('');
+            $('#J_Title').focus();
+        });
+    },
+    addNote: function(props) {
+        $('#J_Save').click(function() {
+            let title = $('#J_Title').val();
+            let text = $('#J_Mark').val();
+            if($('#J_AAC').val() === 1) {//增加
+                let note = {
+                    userId: '1',
+                    title: title,
+                    text: text
+                };
+                props.postNote(note);
+
+            } else { //修改
+                let noteId = $('#J_AAC').val();
+                let note = {
+                    userId: '1',
+                    title: title,
+                    text: text,
+                    noteId: noteId
+                };
+                props.postNote(note);
+            }
+        })
+    },
+    searchNode: function(props) {
+        $('#J_Search').click(function() {
+            $('#J_SearchInput').removeClass('none');
+            $('#J_SearchInput').addClass('block');
+        })
+        $('#J_SearchInput').keydown(function(ev) {
+            var ev=ev||window.event;
+            if(ev.keyCode === 13) {
+                let note = {
+                    userId: '1',
+                    text: ev.target.value
+                }
+                props.postNote(note)
+                $('#J_SearchInput').removeClass('block');
+                $('#J_SearchInput').addClass('none');
+            }
         })
     }
 }

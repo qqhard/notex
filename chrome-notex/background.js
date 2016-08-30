@@ -16,6 +16,32 @@ function textParse(text) {
     return text.replace(/(^\s*)|(\s*$)/g, "");
 }
 
+console.log('test');
+//test
+var note = {userId:"1",text:"采用PPpd\n",title:null,url:"www",tags:"",time:0};
+$.ajax({
+    url:"http://localhost:8080/note",
+    data: JSON.stringify(note),
+    type: "POST",
+    contentType: "application/json",
+    success: function (data) {
+        console.log(data);
+    }
+});
+
+var note = {noteId:"1",userId:"1",text:"heheheh\n",title:null,url:"www",tags:"",time:0};
+$.ajax({
+    url:"http://localhost:8080/note/"+"1",
+    data: JSON.stringify(note),
+    type: "PUT",
+    contentType: "application/json",
+    success: function (data) {
+        console.log(data);
+    }
+})
+
+//test
+
 function pushNote(text, title, url) {
     var note = {
         userId: userId,

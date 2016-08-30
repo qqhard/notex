@@ -1,13 +1,17 @@
 package org.crazy.action;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.crazy.model.User;
+import org.crazy.model.UserForm;
 import org.crazy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,27 +28,37 @@ public class UserAction {
     @Autowired  
     private  HttpServletRequest request;  
     
-    @RequestMapping(value = "/user/addUser")
-    public Object addUser(@RequestParam("username") String username,
-                          @RequestParam("password") String password){
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        User rst = userRepository.save(user);
-        if(rst != null) {
-            return true;
+    @RequestMapping(value = "/user/addUser", method = RequestMethod.POST)
+    public Object addUser(@RequestBody  User user){
+        
+        HashMap<String, Object> rstMap = new HashMap<String, Object>();
+        
+        if(user == null && user.getUsername() !=  null && user.getPassword() != null) {
+            User rstUser = userRepository.findByUsername(user.getUsername());
+            
+            if(rstUser != null) {
+                User rst = userRepository.save(user);
+                if(rst != null) {
+                    rstMap.put("success", true);
+                }
+            }
+            else {
+                rstMap.put("success", false);
+                rstMap.put("msg", "username exist");
+            }
         }
         else {
-            return false;
+            rstMap.put("success", false);
+            rstMap.put("msg", "wrong arguments");
         }
         
+        return rstMap;
     }
     
-    @RequestMapping(value = "/user/login")
-    public Object login(@RequestParam("username") String username,
-                          @RequestParam("password") String password){
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public Object login(@RequestBody  UserForm userForm){
         HttpSession session = request.getSession(); 
-        User user = userRepository.findByUsernameAndPassword(username, password);
+        User user = userRepository.findByUsernameAndPassword(userForm.getUsername(), userForm.getPassword());
         if(user == null) {
             return false;
         } 
@@ -54,8 +68,9 @@ public class UserAction {
         }
     }
     
-    @RequestMapping(value = "/user/logout")
-    public Object logout() {
+    @RequestMapping(value = "/user/logout", method = RequestMethod.POST)
+    public Object logout(@RequestBody  UserForm userForm) {
+        
         HttpSession session = request.getSession();
         session.invalidate();
         return null;

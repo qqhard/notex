@@ -4,6 +4,8 @@ package org.crazy.config;
 import org.crazy.listener.CsrfHeaderFilter;
 import org.crazy.listener.LoginFailureHandler;
 import org.crazy.listener.LoginSuccessHandler;
+import org.crazy.listener.MyAccessDeniedHandler;
+import org.crazy.listener.MyLoginUrlAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,14 +33,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     public void configure(WebSecurity web) throws Exception {  
-    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/");
+    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/note","/note/*");
     }
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
     	http
     		.authorizeRequests()
-    			.antMatchers("/user/username").permitAll()
+    			.antMatchers("/user/username","/note/*","/note").
+    			permitAll()
     			.anyRequest()
     			.authenticated();
     	http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
@@ -94,6 +98,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public LoginFailureHandler loginFailureHandler(){
     	return new LoginFailureHandler();
+    }
+    
+    @Bean
+    public MyLoginUrlAuthenticationEntryPoint myLoginUrlAuthenticationEntryPoint(){
+        return new MyLoginUrlAuthenticationEntryPoint();
+    }
+    
+    @Bean
+    public MyAccessDeniedHandler myAccessDeniedHandler(){
+        return new MyAccessDeniedHandler();
     }
 
 }

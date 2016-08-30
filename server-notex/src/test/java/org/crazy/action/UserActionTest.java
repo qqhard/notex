@@ -29,24 +29,24 @@ public class UserActionTest extends MockMvcResultMatchers {
        mvc = MockMvcBuilders.standaloneSetup(new UserAction()).build();
     }
     
-    @Test
-    public void testAddUser() throws Exception{
-       RequestBuilder request = null;
-       request = MockMvcRequestBuilders.post("/user/addUser").param("username", "testadd").param("password", "pass343");
-       mvc.perform(request).andExpect(status().isOk()).andExpect(content().string("true"));
-    }
-    
-    @Test
-    public void testLogin() throws Exception{
-       RequestBuilder request = null;
-       request = MockMvcRequestBuilders.post("/user/login").param("username", "jike").param("password", "1323");
-       mvc.perform(request).andExpect(status().isOk());
-    }
-    
-    @Test
-    public void testLogout() throws Exception{
-       RequestBuilder request = null;
-       request = MockMvcRequestBuilders.post("/user/logout");
-       mvc.perform(request).andExpect(status().isOk());
-    }
+//    @Test
+//    public void testAddUser() throws Exception{
+//       RequestBuilder request = null;
+//       request = MockMvcRequestBuilders.post("/user/addUser").param("username", "testadd").param("password", "pass343");
+//       mvc.perform(request).andExpect(status().isOk()).andExpect(content().string("true"));
+//    }
+//    
+//    @Test
+//    public void testLogin() throws Exception{
+//       RequestBuilder request = null;
+//       request = MockMvcRequestBuilders.post("/user/login").param("username", "jike").param("password", "1323");
+//       mvc.perform(request).andExpect(status().isOk());
+//    }
+//    
+//    @Test
+//    public void testLogout() throws Exception{
+//       RequestBuilder request = null;
+//       request = MockMvcRequestBuilders.post("/user/logout");
+//       mvc.perform(request).andExpect(status().isOk());
+//    }
 }

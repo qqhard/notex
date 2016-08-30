@@ -2,7 +2,6 @@ var TYPE_PUSH = 'PUSH';
 var TYPE_REMOVE = 'REMOVE';
 var TYPE_EDIT = 'EDIT';
 var selection = null;
-console.log("test");
 
 function send(txt) {
     var message = {
@@ -42,11 +41,6 @@ function removeNote(noteId) {
         document.getElementById(noteId).remove();
     });
 }
-//
-// $(document).on('click', '.editNote', function (e) {
-//     console.log(e);
-//     console.log(e.target.parentElement.getAttribute('noteId'));
-// });
 
 
 document.addEventListener("click", function (e) {

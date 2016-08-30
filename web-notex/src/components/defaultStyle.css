@@ -30,6 +30,25 @@
 	color: #672b00;
 	margin-top: 25px;
 }
+.search {
+	position: absolute;
+	left: 22px;
+	top: 306px;
+	width: 200px;
+	height: 30px;
+	border-radius: 30px;
+	background-color: #7bb7fa;
+	border: 1px solid #672b00;
+	z-index: 99;
+	text-align: center;
+}
+.search-input {
+	border: none;
+	width: 170px;
+	height: 25px;
+	background-color: #7bb7fa;
+	outline: none;
+}
 
 /*list*/
 
@@ -113,6 +132,7 @@
 	line-height: 115px;
 	color: #fff;
 	display: none;
+	z-index: 9999;
 }
 .delete span {
 	color: #fff;

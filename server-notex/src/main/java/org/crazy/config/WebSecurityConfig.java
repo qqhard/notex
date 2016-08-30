@@ -33,17 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     public void configure(WebSecurity web) throws Exception {  
-    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/", "/user/addUser");
+    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/note","/note/*", "/user/addUser");
     }
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
-        
-        
+        http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
     	http
     		.authorizeRequests()
-    			.antMatchers("/user/username").
+    			.antMatchers("/user/username","/note/*","/note","/query").
     			permitAll()
     			.anyRequest()
     			.authenticated();
@@ -54,9 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		.successHandler(loginSuccessHandler())
     		.failureHandler(loginFailureHandler())
     		.permitAll();
-    	
-
-    	
     	
     	http
     		.logout()

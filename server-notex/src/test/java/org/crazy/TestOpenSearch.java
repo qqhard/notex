@@ -21,7 +21,7 @@ public class TestOpenSearch {
 	Map<String, Object> opts = new HashMap<String, Object>();
 	String host = "http://opensearch-cn-beijing.aliyuncs.com";
 	@Test
-	public void test() throws ClientProtocolException, IOException{
+	public void testPush() throws ClientProtocolException, IOException{
 		CloudsearchClient client = new CloudsearchClient(accesskey, secret , host, opts, KeyTypeEnum.ALIYUN);
 		CloudsearchDoc doc = new CloudsearchDoc("notex", client);
 		Map<String, Object> fields = new HashMap<String, Object>();
@@ -38,7 +38,7 @@ public class TestOpenSearch {
 	}
 	
 	@Test
-	public void search() throws ClientProtocolException, IOException {
+	public void testSearch() throws ClientProtocolException, IOException {
 		CloudsearchClient client = new CloudsearchClient(accesskey, secret , host, opts, KeyTypeEnum.ALIYUN);
 		CloudsearchSearch search = new CloudsearchSearch(client);
 		search.addIndex("notex");

@@ -6,15 +6,20 @@ var TYPE_LOGOUT = 'LOGOUT';
 var STATUS_OK = 1;
 var STATUS_FAIL = 0;
 
-function viewLogin() {
+function viewLogin() {//登陆
     document.getElementById("view").innerHTML = "\
         <form>\
-            <label for=\"username\">用户名</label>\
-            <input id=\"username\" name=\"username\" type=\"text\">\
-            \<label for=\"password\">密码</label>\
-            <input id=\"password\" name=\"password\" type=\"password\">\
-            <input id='bLogin' type=\"button\" value=\"登陆\">\
-            <a id='aRegister'>注册</a>\
+            <img class='logo' src='images/logo.png' />\
+            <p>\
+                <label for=\"username\">用户名:</label>\
+                <input id=\"username\" name=\"username\" type=\"text\">\
+            </p>\
+            <p>\
+                <label for=\"password\">密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>\
+                <input id=\"password\" name=\"password\" type=\"password\">\
+            </p>\
+            <input class='button' id='bLogin' type=\"button\" value=\"登陆\">\
+            <a href='javascript:;' class='link' id='aRegister'>注册</a>\
         </form>\
     ";
 }
@@ -22,14 +27,21 @@ function viewLogin() {
 function viewRegister() {
     document.getElementById("view").innerHTML = "\
         <form>\
-            <label for=\"username\">用户名</label>\
-            <input id=\"username\" name=\"username\" type=\"text\">\
-            <label for=\"password\">密码</label>\
-            <input id=\"password\" name=\"password\" type=\"password\">\
-            <label for=\"rePassword\">再次输入</label>\
-            <input id=\"rePassword\" name=\"rePassword\" type=\"password\">\
-            <input id='bRegister' type=\"button\" value=\"注册\">\
-            <a id='aLogin'>登录</a>\
+            <img class='logo' src='images/logo.png' />\
+            <p>\
+                <label for=\"username\">用&nbsp;&nbsp;户&nbsp;&nbsp;名:</label>\
+                <input id=\"username\" name=\"username\" type=\"text\">\
+            </p>\
+            <p>\
+                <label for=\"password\">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>\
+                <input id=\"password\" name=\"password\" type=\"password\">\
+            </p>\
+            <p>\
+                <label for=\"rePassword\">再次输入:</label>\
+                <input id=\"rePassword\" name=\"rePassword\" type=\"password\">\
+            </p>\
+            <input class='button' id='bRegister' type=\"button\" value=\"注册\">\
+            <a href='javascript:;' class='link' id='aLogin'>登录</a>\
         </form>\
     ";
 }
@@ -38,8 +50,9 @@ function viewRegister() {
 function viewUser(username) {
     document.getElementById("view").innerHTML = "\
         <div class='user'>\
+            <img class='logo' src='images/logo.png' />\
             <h3>用户"+username+"已登陆</h3> \
-            <input id='bLogout' type=\"button\" value=\"注销\">\ \
+            <input class='button' id='bLogout' type=\"button\" value=\"注销\">\ \
         </div>\
     ";
 }
@@ -47,6 +60,7 @@ function viewUser(username) {
 function viewText(text) {
     document.getElementById("view").innerHTML = "\
         <div>\
+            <img class='logo' src='images/logo.png' />\
             <h3>"+text+"</h3> \
         </div>\
     ";

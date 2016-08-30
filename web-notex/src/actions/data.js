@@ -8,9 +8,10 @@ import { browserHistory } from 'react-router';
 export const getNotes = () => {
     return (dispatch)=> {
         $.get(urls.GET_NOTES, (data)=> {
+            let notes = data._embedded.note;
             dispatch({
                 type: types.GET_NOTES_SUCCESS,
-                notes: data
+                notes: notes
             })
         }).error((e)=> {
             dispatch({

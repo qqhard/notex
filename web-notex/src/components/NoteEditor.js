@@ -11,7 +11,6 @@ class NoteEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'qqq'
         }
     }
     handleChangeTitle(event) {
@@ -56,7 +55,6 @@ class NoteEditor extends React.Component {
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
                     <a href="javascript:;"></a>
-                    <a href='javascript:;' className='iconfont icon-weidenglu'></a>
                     <a href='javascript:;' id='J_Add' className='iconfont icon-tianjia'></a>
                     <a href='javascript:;' id='J_Search' className='iconfont icon-sousuo'></a>
                     <div id='J_SearchInput' className='search none'>
@@ -90,7 +88,6 @@ class NoteEditor extends React.Component {
         )
     }
     componentDidMount() {
-        console.log('test');
         // this.props.editTitle();
         /*var note = {
             url:'www.xiaoruo.com',
@@ -111,7 +108,8 @@ class NoteEditor extends React.Component {
         eve.showNote();
         eve.newNote();
         eve.addNote(this.props);
-        eve.searchNode(this.props);
+        eve.searchNote(this.props);
+        eve.deleteNote(this.props);
     }
 }
 
@@ -164,6 +162,8 @@ let eve = {
                 child = e.target.parentNode;
             } else if(target === 'li') {
                 child = e.target.children[0];
+            } else {
+                return;
             }
             let title = child.children[0].innerHTML;
             let text = child.children[2].innerHTML;
@@ -174,7 +174,6 @@ let eve = {
             let hCon = marked(content);
             right.html(hCon);
             _this.highLightCode();
-            console.log(child.children[4].value);
             $('#J_AAC').val(child.children[4].value);
 
         })
@@ -211,7 +210,7 @@ let eve = {
             }
         })
     },
-    searchNode: function(props) {
+    searchNote: function(props) {
         $('#J_Search').click(function() {
             $('#J_SearchInput').removeClass('none');
             $('#J_SearchInput').addClass('block');
@@ -228,6 +227,16 @@ let eve = {
                 $('#J_SearchInput').addClass('none');
             }
         })
+    },
+    deleteNote: function(props) {
+        $('#J_List').click(function(e) {
+            if(e.target.tagName.toLowerCase() === 'div') {
+                let list = e.target.parentNode.parentNode;
+                let note = e.target.nextSibling.value;
+                props.deleteNote(note);
+                $(list).remove();
+            }
+        });
     }
 }
 

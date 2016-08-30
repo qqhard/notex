@@ -33,7 +33,7 @@
 .search {
 	position: absolute;
 	left: 22px;
-	top: 248px;
+	top: 306px;
 	width: 200px;
 	height: 30px;
 	border-radius: 30px;
@@ -132,6 +132,7 @@
 	line-height: 115px;
 	color: #fff;
 	display: none;
+	z-index: 9999;
 }
 .delete span {
 	color: #fff;

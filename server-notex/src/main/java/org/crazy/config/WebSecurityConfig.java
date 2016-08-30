@@ -4,6 +4,8 @@ package org.crazy.config;
 import org.crazy.listener.CsrfHeaderFilter;
 import org.crazy.listener.LoginFailureHandler;
 import org.crazy.listener.LoginSuccessHandler;
+import org.crazy.listener.MyAccessDeniedHandler;
+import org.crazy.listener.MyLoginUrlAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,9 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -36,9 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
     	http
     		.authorizeRequests()
-    			.antMatchers("/user/username").permitAll()
+    			.antMatchers("/user/username").
+    			permitAll()
     			.anyRequest()
     			.authenticated();
     	http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
@@ -50,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		.permitAll();
     	
 
+    	
     	
     	http
     		.logout()
@@ -96,6 +104,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public LoginFailureHandler loginFailureHandler(){
     	return new LoginFailureHandler();
+    }
+    
+    @Bean
+    public MyLoginUrlAuthenticationEntryPoint myLoginUrlAuthenticationEntryPoint(){
+        return new MyLoginUrlAuthenticationEntryPoint();
+    }
+    
+    @Bean
+    public MyAccessDeniedHandler myAccessDeniedHandler(){
+        return new MyAccessDeniedHandler();
     }
 
 }

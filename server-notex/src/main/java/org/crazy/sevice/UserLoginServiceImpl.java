@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.crazy.model.User;
 import org.crazy.model.UserLoginDetails;
+import org.crazy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +24,7 @@ public class UserLoginServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDao.findByUsername(username);
+		User user = userRepository.findByUsername(username);
 
 		if (user != null) {
 

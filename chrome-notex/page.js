@@ -74,7 +74,7 @@ function htmlNote(note) {
 
 function show(notes) {
     $("#notex").remove();
-    var newNodes = $("<div id='notex' class='index'><h3>NoteX 笔记内容</h3></div>");
+    var newNodes = $("<div id='notex' class='index'></div>");
     for (var i = 0; i < notes.length; i++) {
         newNodes.append(htmlNote(notes[i]));
     }
@@ -84,7 +84,6 @@ function show(notes) {
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     show(message);
-
 });
 
 document.addEventListener("mouseup", function (e) {
@@ -104,4 +103,3 @@ document.onkeydown = function () {
         }
     }
 }
-

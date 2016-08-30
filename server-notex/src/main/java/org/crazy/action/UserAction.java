@@ -3,7 +3,7 @@ package org.crazy.action;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.crazy.model.User;
 import org.crazy.repository.UserRepository;
@@ -26,17 +26,12 @@ public class UserAction {
     @Autowired
     private UserRepository userRepository;
     
-    @Autowired  
-    private  HttpServletRequest request;  
-    
-
-    
-    @RequestMapping(value = "/user/addUser", method = RequestMethod.POST)
-    public Object addUser(@RequestBody User user){
-        PasswordEncoder passwordEncoder=new BCryptPasswordEncoder(4);
+    private PasswordEncoder passwordEncoder=new BCryptPasswordEncoder(4);
+   
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+    public Object register(@RequestBody User user){
+        
         HashMap<String, Object> rstMap = new HashMap<String, Object>();
-        
-        
         
         User rstUser = userRepository.findByUsername(user.getUsername());
         
@@ -53,18 +48,30 @@ public class UserAction {
         return rstMap;
     }
     
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public Object login(@RequestBody User user,HttpSession httpSession){
+        System.out.println(user.getUsername());
+        HashMap<String, Object> rstMap = new HashMap<String, Object>();
+        
+        User rstUser = userRepository.findByUsername(user.getUsername());
+        
+        boolean flag = false;
+        if(rstUser != null){
+        	flag = passwordEncoder.matches(user.getPassword(), rstUser.getPassword());
+        	if(flag){
+        		httpSession.setAttribute("userId", rstUser.getUserId());
+        		rstMap.put("userId", rstUser.getUserId());
+        	}
+        }
+        rstMap.put("success", flag);
+        return rstMap;
+    }
     
-    
-
-    
-//    @RequestMapping(value = "/user/logout", method = RequestMethod.POST)
-//    public Object logout(@RequestBody  UserForm userForm) {
-//        //CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-//        //String token =  csrf.getToken();
-//        HttpSession session = request.getSession();
-//        session.invalidate();
-//        HashMap<String, Object> rstMap = new HashMap<String, Object>();
-//        rstMap.put("success", true);
-//        return rstMap;
-//    }
+    @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
+    public Object logout(HttpSession httpSession){
+    	httpSession.removeAttribute("userId");
+    	HashMap<String,Object> map = new HashMap<String,Object>();
+    	map.put("success", true);
+    	return map;
+    }
 }

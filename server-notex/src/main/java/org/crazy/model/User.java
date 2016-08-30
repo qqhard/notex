@@ -25,5 +25,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getAuthentications() {
+		return "USER";
+	}
+	public void setAuthentications(String authentications) {
+	}
 	
 }

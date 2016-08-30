@@ -22,6 +22,10 @@
     "tabs",
     "storage",
     "webRequest",
-    "*://*.baidu.com/"
-  ]
+    "*://*.baidu.com/",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "icon.png"
+  }
 }

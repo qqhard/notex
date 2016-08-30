@@ -2,15 +2,22 @@ package org.crazy.action;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.crazy.model.Note;
 import org.crazy.repository.NoteRepository;
 import org.crazy.sevice.SearchService;
+import org.crazy.sevice.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.hankcs.hanlp.HanLP;
 
 @RestController
 public class NoteAction {
@@ -21,9 +28,17 @@ public class NoteAction {
 	@Autowired
 	private SearchService searchService;
 	
+	@Autowired
+	private TagService tagService;
+	
+	
 	@RequestMapping(value="/note", method=RequestMethod.GET)
-	public List<Note> gets(){
-		return noteRepository.findAll();
+	public Object gets(HttpSession httpSession){
+		String userId = (String) httpSession.getAttribute("userId");
+		if(userId == null){
+			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+		}
+		return noteRepository.findByUserId(userId);
 	}
 	
 	@RequestMapping(value="/note/{noteId}", method=RequestMethod.GET)
@@ -33,6 +48,8 @@ public class NoteAction {
 	
 	@RequestMapping(value="/note", method=RequestMethod.POST)
 	public Note post(@RequestBody Note note){
+		note.setTags(tagService.getKeyWords(note.getText(), 3));
+		
 		noteRepository.save(note);
 		searchService.pushNote(note);
 		return note;

@@ -8,6 +8,7 @@ var TYPE_REGISTER = 'REGISTER';
 var TYPE_LOGOUT = 'LOGOUT';
 var STATUS_OK = 1;
 var STATUS_FAIL = 0;
+var PRE_URL = 'http://localhost:8080';
 
 var userId = null;
 var gUsername = null;
@@ -16,44 +17,62 @@ function textParse(text) {
     return text.replace(/(^\s*)|(\s*$)/g, "");
 }
 
+chrome.contextMenus.create({
+    title:'增添笔记',
+    contexts:['selection'],
+});
+
+chrome.contextMenus.onClicked.addListener(function(){
+    console.log('test');
+});
+
 console.log('test');
 //test
-var note = {userId:"1",text:"采用PPpd\n",title:null,url:"www",tags:"",time:0};
-$.ajax({
-    url:"http://localhost:8080/note",
-    data: JSON.stringify(note),
-    type: "POST",
-    contentType: "application/json",
-    success: function (data) {
-        console.log(data);
-    }
-});
+// var note = {userId:"1",text:"采用PPpd\n",title:null,url:"www",tags:"",time:0};
+// $.ajax({
+//     url:"http://localhost:8080/note",
+//     data: JSON.stringify(note),
+//     type: "POST",
+//     contentType: "application/json",
+//     success: function (data) {
+//         console.log(data);
+//     }
+// });
+//
+// var note = {noteId:"1",userId:"1",text:"heheheh\n",title:null,url:"www",tags:"",time:0};
+// $.ajax({
+//     url:"http://localhost:8080/note/"+"1",
+//     data: JSON.stringify(note),
+//     type: "PUT",
+//     contentType: "application/json",
+//     success: function (data) {
+//         console.log(data);
+//     }
+// });
+//
+// setTimeout(function () {
+//     $.ajax({
+//         url:"http://localhost:8080/note/"+"1",
+//         type: "DELETE",
+//         contentType: "application/json",
+//         success: function (data) {
+//             console.log(data);
+//         }
+//     });
+// },500);
+//
+// var user = {
+//     username:'abc',
+//     password:'123',
+// }
 
-var note = {noteId:"1",userId:"1",text:"heheheh\n",title:null,url:"www",tags:"",time:0};
-$.ajax({
-    url:"http://localhost:8080/note/"+"1",
-    data: JSON.stringify(note),
-    type: "PUT",
-    contentType: "application/json",
-    success: function (data) {
-        console.log(data);
-    }
-});
 
-setTimeout(function () {
-    $.ajax({
-        url:"http://localhost:8080/note/"+"1",
-        type: "DELETE",
-        contentType: "application/json",
-        success: function (data) {
-            console.log(data);
-        }
-    });
-},500);
+//$.get('http://localhost:8080/user/logout');
 
 //test
 
 function pushNote(text, title, url) {
+    if(userId == null)return ;
     var note = {
         userId: userId,
         text: textParse(text),
@@ -75,6 +94,7 @@ function pushNote(text, title, url) {
 }
 
 function removeNote(noteId) {
+    if(userId == null)return ;
     $.ajax({
         url:"http://localhost:8080/note/"+noteId,
         type: "DELETE",
@@ -86,19 +106,47 @@ function removeNote(noteId) {
 }
 
 function login(username,password,sendResponse) {
-    console.log('login '+username+""+password);
-    sendResponse(STATUS_OK);
-    userId = "1";
-    gUsername = username;
+    var user = {
+        username: username,
+        password: password,
+    };
+    $.ajax({
+        url: PRE_URL+"/user/login",
+        data:  JSON.stringify(user),
+        type: "POST",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            userId = data.userId;
+            gUsername = username;
+            sendResponse(STATUS_OK);
+        }
+    });
+
 }
 
 function register(username,password,rePassword,sendResponse) {
-    console.log(username);
-    sendResponse(STATUS_OK);
+    var user = {
+        username: username,
+        password: password,
+        rePassword: rePassword,
+    };
+    $.ajax({
+        url: PRE_URL+"/user/register",
+        data:  JSON.stringify(user),
+        type: "POST",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            sendResponse(STATUS_OK);
+        }
+    });
 }
 
 function logout(sendResponse) {
     gUsername = null;
+    userId = null;
     sendResponse(STATUS_OK);
 }
 
@@ -107,7 +155,7 @@ function startListeners() {
 
     chrome.webRequest.onBeforeRequest.addListener(function (details) {
         var query = details.url.match(/.*wd=(.*?)[&$]/)[1];
-        $.get("http://localhost:8080/query?userId=1&text="+query,function (notes) {
+        $.get("http://localhost:8080/query?userId="+userId+"&text="+query,function (notes) {
             chrome.tabs.sendMessage(details.tabId, notes);
         });
     },{

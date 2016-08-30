@@ -20,9 +20,6 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -36,12 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     public void configure(WebSecurity web) throws Exception {  
-    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/");
+    	web.ignoring().antMatchers("/image/**","/css/**","/js/**", "/", "/user/addUser");
     }
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
+        //http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
+        
+        
     	http
     		.authorizeRequests()
     			.antMatchers("/user/username").

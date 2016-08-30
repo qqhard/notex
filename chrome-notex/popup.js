@@ -1,106 +1,128 @@
-var IS_START = 'isstart';
-var IS_REMOVE = 'isremove';
-var FALLOFF = 'falloff';
-var ROUND = 'round';
-var THD_REMOVE = 'thdremove';
-var INIT_WEIGHT = 'initweight';
-var ADD_WEIGHT = 'addweight';
-var TYPE_GET = 'GET';
-var TYPE_SET = 'SET';
-var PARAM = 'param';
 
-function disableInputs(disabled) {
-    var inputs = document.getElementsByTagName('input');
-    for(var i = 0;i < inputs.length;i++){
-        if(inputs[i].getAttribute('name') != IS_START){
-            inputs[i].disabled = disabled;
-        }
-    }
+var TYPE_LOGIN = 'LOGIN';
+var TYPE_REGISTER = 'REGISTER';
+var TYPE_USERNAME = 'USERNAME';
+var TYPE_LOGOUT = 'LOGOUT';
+var STATUS_OK = 1;
+var STATUS_FAIL = 0;
+
+function viewLogin() {
+    document.getElementById("view").innerHTML = "\
+        <form>\
+            <label for=\"username\">用户名</label>\
+            <input id=\"username\" name=\"username\" type=\"text\">\
+            \<label for=\"password\">密码</label>\
+            <input id=\"password\" name=\"password\" type=\"password\">\
+            <input id='bLogin' type=\"button\" value=\"登陆\">\
+            <a id='aRegister'>注册</a>\
+        </form>\
+    ";
+}
+
+function viewRegister() {
+    document.getElementById("view").innerHTML = "\
+        <form>\
+            <label for=\"username\">用户名</label>\
+            <input id=\"username\" name=\"username\" type=\"text\">\
+            <label for=\"password\">密码</label>\
+            <input id=\"password\" name=\"password\" type=\"password\">\
+            <label for=\"rePassword\">再次输入</label>\
+            <input id=\"rePassword\" name=\"rePassword\" type=\"password\">\
+            <input id='bRegister' type=\"button\" value=\"注册\">\
+            <a id='aLogin'>登录</a>\
+        </form>\
+    ";
 }
 
 
-function queryAndRender() {
-    var message = {
-        type: TYPE_GET,
-        name: PARAM
-    };
-    chrome.runtime.sendMessage(message,function (param) {
-        if(!param[IS_START]){
-            disableInputs(true);
+function viewUser(username) {
+    document.getElementById("view").innerHTML = "\
+        <div class='user'>\
+            <h3>用户"+username+"已登陆</h3> \
+            <input id='bLogout' type=\"button\" value=\"注销\">\ \
+        </div>\
+    ";
+}
+
+function viewText(text) {
+    document.getElementById("view").innerHTML = "\
+        <div>\
+            <h3>"+text+"</h3> \
+        </div>\
+    ";
+}
+
+function login(username,password) {
+    chrome.runtime.sendMessage({
+        type: TYPE_LOGIN,
+        username: username,
+        password: password
+    },function(data){
+        if(data === STATUS_OK){
+            viewUser(username);
+        }else{
+
         }
-        document.getElementById(IS_START).checked = param[IS_START];
-        document.getElementById(IS_REMOVE).checked = param[IS_REMOVE];
-        document.getElementById(FALLOFF).value = parseInt(param[FALLOFF]*100);
-        document.getElementById(THD_REMOVE).value = parseInt(param[THD_REMOVE]*10);
-        document.getElementById(ROUND).value = param[ROUND];
-        document.getElementById(INIT_WEIGHT).value = param[INIT_WEIGHT];
-        document.getElementById(ADD_WEIGHT).value = param[ADD_WEIGHT];
     });
 }
 
-queryAndRender();
-
-function changeParam(name,value,fun) {
-    var message = {
-        type: TYPE_SET,
-        name: name,
-        value: value
-    };
-    if(!!fun){
-        chrome.runtime.sendMessage(message,fun);
-    }else{
-        chrome.runtime.sendMessage(message);
-    }
-
-}
-
-document.getElementById(IS_START).onchange = function (event) {
-    var value = event.target.checked;
-    changeParam(IS_START,value,function () {
-        disableInputs(!value);
+function register(username,password,rePassword) {
+    chrome.runtime.sendMessage({
+        type: TYPE_REGISTER,
+        username: username,
+        password: password,
+        rePassword: rePassword
+    },function(data){
+        if (data === STATUS_OK){
+            viewText('注册成功，1s后跳转');
+            setTimeout(function () {
+                viewLogin();
+            },1000);
+        }
     });
 }
 
-document.getElementById(IS_REMOVE).onchange = function (event) {
-    var value = event.target.checked;
-    changeParam(IS_REMOVE,value);
+function logout() {
+    chrome.runtime.sendMessage({
+        type: TYPE_LOGOUT,
+    },function(data){
+        if(data === STATUS_OK){
+            viewLogin();
+        }else{
+
+        }
+    });
 }
 
-document.getElementById(FALLOFF).onchange = function (event) {
-    var value = event.target.value;
-    if(!!value){
-        changeParam(FALLOFF,parseFloat(value)/100.0);
+document.addEventListener("click", function (e) {
+    var id = e.target.id;
+    if(id === 'bLogin'){
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        login(username,password);
+    }else if(id === 'bRegister'){
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var rePassword = document.getElementById('rePassword').value;
+        register(username, password, rePassword);
+    }else if(id === 'bLogout'){
+        logout();
+    }else if(id === 'aRegister'){
+        viewRegister();
+    }else if(id === 'aLogin'){
+        viewLogin();
     }
-}
+});
 
-document.getElementById(ROUND).onchange = function (event) {
-    var value = event.target.value;
-    if(!!value){
-        changeParam(ROUND,parseInt(value));
-    }
-}
 
-document.getElementById(THD_REMOVE).onchange = function (event) {
-    var value = event.target.value;
-    if(!!value){
-        changeParam(THD_REMOVE,parseFloat(value)/10.0);
-    }
-}
-
-document.getElementById(INIT_WEIGHT).onchange = function (event) {
-    var value = event.target.value;
-    if(!!value){
-        changeParam(INIT_WEIGHT,parseInt(value));
-    }
-}
-
-document.getElementById(ADD_WEIGHT).onchange = function (event) {
-    var value = event.target.value;
-    if(!!value){
-        changeParam(ADD_WEIGHT,parseInt(value));
-    }
-}
-
-document.getElementById("form").onkeydown = function (event) {
-    event.preventDefault();
-}
+(function () {
+    chrome.runtime.sendMessage({
+        type: TYPE_USERNAME,
+    },function(username){
+        if(!!username){
+            viewUser(username);
+        }else{
+            viewLogin();
+        }
+    });
+})();

@@ -38,7 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
+        //http.exceptionHandling().authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint());
+        http.csrf().disable();
     	http
     		.authorizeRequests()
     			.antMatchers("/user/username","/note/*","/note","/query").
@@ -46,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     			.anyRequest()
     			.authenticated();
     	http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+    	
+    	
     	
     	http.formLogin()
     		.loginProcessingUrl("/user/login")

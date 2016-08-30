@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -54,6 +56,13 @@ public class TestUserRepository {
         String password = "abcdef";
         User user = userRepository.findByUsernameAndPassword(username, password);
         System.out.println(user.getUserId());
+    }
+    
+    @Test
+    public void testFindByUsername(){
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("mypassword"));
+        System.out.println(passwordEncoder.encode("mypassword"));
     }
     
 }

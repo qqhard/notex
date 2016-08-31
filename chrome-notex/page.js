@@ -52,6 +52,7 @@ document.addEventListener("click", function (e) {
     } else if (/removeNote/.test(target.className)) {
         removeNote(noteId);
     }
+
 });
 
 function htmlNote(note) {
@@ -63,11 +64,11 @@ function htmlNote(note) {
             <div class='post-meta'>" + timeFormat(note.time) + "<span class='post-tags'><span>工具</span></span></div>\
             <div class='post-content'><p>" + note.text + "</p></div>\
             <p class='readmore' noteId='" + note.noteId + "'>\
-                <span class='editNote iconfont icon-xiugai'></span>\
-                <span class='removeNote iconfont icon-xiao10'></span>\
-                <span class='iconfont icon-shengxu'></span>\
-                <span class='iconfont icon-jiangxu'></span>\
-             </p>\
+                <a href='javascript:;' class='editNote iconfont icon-xiugai'></a>\
+                <a href='javascript:;' class='removeNote iconfont icon-xiao10'></a>\
+                <a href='javascript:;' class='iconfont icon-shengxu'></a>\
+                <a href='javascript:;' class='iconfont icon-jiangxu'></a>\
+            </p>\
         </div>\
     ");
 }
@@ -96,9 +97,18 @@ document.addEventListener("mouseup", function (e) {
 
 document.onkeydown = function () {
     var oEvent = window.event;
-    if (oEvent.keyCode == 67 && oEvent.ctrlKey) {
+    if (oEvent.keyCode == 67 && oEvent.shiftKey) {
         if (selection != null) {
             send(selection);
+            var alert = $("\
+                <div class='alert'>\
+                    <h3>您的选中已保存至猿笔记</h3>\
+                </div>\
+            ");
+            $('body').append(alert);
+            setTimeout(function(){
+                $(alert)1.remove();
+            }, 3000);
             selection = null;
         }
     }

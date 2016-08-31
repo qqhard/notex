@@ -1,6 +1,11 @@
 /**
  * Created by hard on 16-8-27.
  */
+
+/**
+ * 1.
+ */
+
 import React from 'react';
 import { browserHistory } from 'react-router';
 import './dark.css';
@@ -88,20 +93,6 @@ class NoteEditor extends React.Component {
         )
     }
     componentDidMount() {
-        // this.props.editTitle();
-        /*var note = {
-            url:'www.xiaoruo.com',
-            title:'测试post',
-            text:'hello world',
-            tags: '',
-            time: Date.parse(new Date()),
-            userId: 100,
-        }
-        this.props.postNote(note);
-        note.tags = '修改了';
-        this.props.putNote(note);
-        console.log(this.state.note);
-        this.props.deleteNote("57c4c0590002860e65b2950a");*/
         eve.getNotes(this.props);
         eve.showMd();
         eve.translateMd();
@@ -149,7 +140,7 @@ let eve = {
         })
     },
     getNotes: function(props) {
-        props.getNotes();
+        props.getNotes();/////////
     },
     showNote: function() {
         let _this = this;
@@ -196,7 +187,7 @@ let eve = {
                     title: title,
                     text: text
                 };
-                props.postNote(note);
+                props.postNote(note);//////
 
             } else { //修改
                 let noteId = $('#J_AAC').val();
@@ -206,7 +197,7 @@ let eve = {
                     text: text,
                     noteId: noteId
                 };
-                props.postNote(note);
+                props.putNote(note);////
             }
         })
     },
@@ -222,7 +213,7 @@ let eve = {
                     userId: '1',
                     text: ev.target.value
                 }
-                props.postNote(note)
+                props.getNote(note);/////////
                 $('#J_SearchInput').removeClass('block');
                 $('#J_SearchInput').addClass('none');
             }
@@ -233,7 +224,7 @@ let eve = {
             if(e.target.tagName.toLowerCase() === 'div') {
                 let list = e.target.parentNode.parentNode;
                 let note = e.target.nextSibling.value;
-                props.deleteNote(note);
+                props.deleteNote(note);/////
                 $(list).remove();
             }
         });

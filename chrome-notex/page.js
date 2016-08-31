@@ -28,11 +28,11 @@ function timeFormat(time) {
 }
 
 function editNote(e) {
-    console.log(e);
+    // console.log(e);
 }
 
 function removeNote(noteId) {
-    console.log(noteId);
+    // console.log(noteId);
     var message = {
         type: TYPE_REMOVE,
         value: noteId
@@ -46,7 +46,7 @@ function removeNote(noteId) {
 document.addEventListener("click", function (e) {
     var target = e.target;
     var noteId = target.parentElement.getAttribute('noteId');
-    console.log(target.className);
+    // console.log(target.className);
     if (/editNote/.test(target.className)) {
         editNote(noteId);
     } else if (/removeNote/.test(target.className)) {
@@ -56,19 +56,26 @@ document.addEventListener("click", function (e) {
 });
 
 function htmlNote(note) {
+    var tags = note.tags.split(",") || [];
+    var tool = '';
+    if(tags.length > 0) {
+        tags.map(function(item, index) {
+            tool += "<span class='tags'>" + item + "</span>"
+        });
+    }
     return $("\
         <div class='post-items' id='" + note.noteId + "'>\
             <div class='post-title'>\
                 <a href='" + note.url + "' target='_blank'>" + note.title + "</a>\
             </div>\
-            <div class='post-meta'>" + timeFormat(note.time) + "<span class='post-tags'><span>工具</span></span></div>\
+            <div class='post-meta'>" + timeFormat(note.time) + "<span class='post-tags'> ." + tool + "</span></div>\
             <div class='post-content'><p>" + note.text + "</p></div>\
             <p class='readmore' noteId='" + note.noteId + "'>\
                 <a href='javascript:;' class='editNote iconfont icon-xiugai'></a>\
                 <a href='javascript:;' class='removeNote iconfont icon-xiao10'></a>\
                 <a href='javascript:;' class='iconfont icon-shengxu'></a>\
                 <a href='javascript:;' class='iconfont icon-jiangxu'></a>\
-            </p>\
+             </p>\
         </div>\
     ");
 }
@@ -88,7 +95,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 });
 
 document.addEventListener("mouseup", function (e) {
-    console.log(window.getSelection());
+    // console.log(window.getSelection());
     var txt = window.getSelection().toString();
     if (txt.length > 1) {
         selection = txt;
@@ -107,7 +114,7 @@ document.onkeydown = function () {
             ");
             $('body').append(alert);
             setTimeout(function(){
-                $(alert)1.remove();
+                $(alert).remove();
             }, 3000);
             selection = null;
         }

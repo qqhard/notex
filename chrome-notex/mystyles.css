@@ -6,7 +6,17 @@ body {
     font-size: 15px;
     font-family: 'Monaco', 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.8; }
-.iconfont:hover {
+.index {
+    margin-bottom: 20px;
+}
+.readmore {
+    margin: 10px 0 10px -20px;
+}
+a.iconfont {
+    color: #7bb7fa;
+    margin-left: 20px;
+}
+a.iconfont:hover {
     color: red
 }
 .index a {
@@ -29,19 +39,14 @@ body {
 .post-title a {
     color: inherit; }
 .post-title a:hover {
-    border-bottom: 2px solid #42b983; }
-
-.post-meta {
-    padding-top: 15px; }
+    border-bottom: 2px solid #672b00; }
 .post-meta .post-tags span {
+    padding: 1px 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
     margin-left: 10px;
-    color: inherit; }
-.post-meta .post-tags span:before {
-    content: '·';
-    margin-right: 10px; }
-
-.post-content a {
-    color: #42b983; }
+    color: inherit;
+}
 
 .post-content h2 {
     color: #000;
@@ -82,11 +87,8 @@ body {
     border-bottom: none; }
 
 .index .post-items {
-    padding: 20px 0;
+    padding-top: 20px;
     border-bottom: 1px solid #672b00;
-}
-.index .post-items .readmore a {
-    color: #0075c9;
 }
 /*.index .post-items:first-child {
     padding-top: 0; }

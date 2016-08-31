@@ -28,6 +28,14 @@ public class NoteAction {
 	private TagService tagService;
 	
 	
+	@RequestMapping(value="/notes/{userId}", method=RequestMethod.GET)
+	public Object gets2(@PathVariable("userId") String userId, HttpSession httpSession){
+		if(userId == null){
+			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+		}
+		return noteRepository.findByUserId(userId);
+	}
+	
 	@RequestMapping(value="/note", method=RequestMethod.GET)
 	public Object gets(HttpSession httpSession){
 		String userId = (String) httpSession.getAttribute("userId");

@@ -81,10 +81,17 @@ function login(username,password,sendResponse) {
         contentType: "application/json",
         async: false,
         success: function (data) {
-            console.log(data);
-            userId = data.userId;
-            gUsername = username;
-            sendResponse(STATUS_OK);
+            if(data.success){
+                userId = data.userId;
+                gUsername = username;
+                sendResponse(STATUS_OK);
+            }else{
+                sendResponse(STATUS_FAIL);
+            }
+
+        },
+        error: function (e) {
+
         }
     });
 
@@ -109,11 +116,18 @@ function register(username,password,rePassword,sendResponse) {
 }
 
 function logout(sendResponse) {
-    gUsername = null;
-    userId = null;
-    sendResponse(STATUS_OK);
+    $.ajax({
+        url: PRE_URL+"/user/logout",
+        type: "GET",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            gUsername = null;
+            userId = null;
+            sendResponse(STATUS_OK);
+        }
+    });
 }
-
 
 function startListeners() {
 
@@ -146,7 +160,8 @@ function startListeners() {
                 register(message.username,message.password,message.rePassword,sendResponse);
                 break;
             case TYPE_USERNAME:
-                sendResponse(gUsername);
+                userId = message.userId;
+                gUsername = message.username;
                 break;
             case TYPE_LOGOUT:
                 logout(sendResponse);

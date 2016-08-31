@@ -75,7 +75,7 @@ function login(username,password) {
         if(data === STATUS_OK){
             viewUser(username);
         }else{
-
+            viewText('用户名不存在或密码错误');
         }
     });
 }
@@ -118,6 +118,10 @@ document.addEventListener("click", function (e) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         var rePassword = document.getElementById('rePassword').value;
+        if(password !=  rePassword){
+            viewText('两次输入密码不一致');
+            return ;
+        }
         register(username, password, rePassword);
     }else if(id === 'bLogout'){
         logout();
@@ -130,13 +134,19 @@ document.addEventListener("click", function (e) {
 
 
 (function () {
-    chrome.runtime.sendMessage({
-        type: TYPE_USERNAME,
-    },function(username){
-        if(!!username){
-            viewUser(username);
+    var PRE_URL = 'http://yuanbiji.com/api';
+    $.get(PRE_URL+"/user/userinfo",function (data) {
+        console.log(data);
+        if(data.success){
+            chrome.runtime.sendMessage({
+                type: TYPE_USERNAME,
+                username: data.username,
+                userId: data.userId,
+            });
+            viewUser(data.username);
         }else{
             viewLogin();
         }
+
     });
 })();

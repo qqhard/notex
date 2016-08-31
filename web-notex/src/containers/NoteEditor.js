@@ -3,14 +3,15 @@
  */
 import {connect} from 'react-redux';
 import NoteEditor from '../components/NoteEditor';
-import {getNotes, getNote, postNote, putNote, deleteNote} from '../actions/data';
+import {getNotes, getNote, postNote, putNote, deleteNote, searchNote} from '../actions/data';
 import { editTitle, editText } from '../actions/edit';
 
 const mapStateToProps = (state) => {
     return {
         notes: state.notes.notes,
         note: state.note.note,
-        edit: state.edit
+        edit: state.edit,
+        user: state.user,
     }
 }
 
@@ -22,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
         putNote: (note)=>dispatch(putNote(note)),
         deleteNote: (noteId)=>dispatch(deleteNote(noteId)),
         editTitle: (title)=>dispatch(editTitle(title)),
-        editText: (text)=>dispatch(editText(text))
+        editText: (text)=>dispatch(editText(text)),
+        searchNote: (userId,text)=>dispatch(searchNote(userId, text)),
     }
 }
 

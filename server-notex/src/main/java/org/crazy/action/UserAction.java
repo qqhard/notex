@@ -2,6 +2,7 @@
 package org.crazy.action;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -60,6 +61,7 @@ public class UserAction {
         	flag = passwordEncoder.matches(user.getPassword(), rstUser.getPassword());
         	if(flag){
         		httpSession.setAttribute("userId", rstUser.getUserId());
+        		httpSession.setAttribute("username", rstUser.getUsername());
         		rstMap.put("userId", rstUser.getUserId());
         	}
         }
@@ -70,8 +72,25 @@ public class UserAction {
     @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
     public Object logout(HttpSession httpSession){
     	httpSession.removeAttribute("userId");
+    	httpSession.removeAttribute("username");
     	HashMap<String,Object> map = new HashMap<String,Object>();
     	map.put("success", true);
     	return map;
     }
+    
+    @RequestMapping(value = "/user/userinfo", method = RequestMethod.GET)
+    public Object username(HttpSession httpSession){
+    	String userId = (String) httpSession.getAttribute("userId");
+    	String username = (String) httpSession.getAttribute("username");
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	if(userId != null && username != null){
+    		map.put("success", true);
+    		map.put("userId", userId);
+    		map.put("username", username);
+    	}else{
+    		map.put("success", false);
+    	}
+    	return map;
+    }
+    
 }

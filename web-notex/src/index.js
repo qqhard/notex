@@ -6,7 +6,7 @@ import {createStore, applyMiddleware} from 'redux';
 import notexApp from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import App from './app';
+import App from './containers/App';
 import NoteEditor from './containers/NoteEditor';
 
 const loggerMiddleware = createLogger();

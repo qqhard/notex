@@ -10,3 +10,6 @@ export const POST_NOTE = PRE + '/note/';
 export const PUT_NOTE = (noteId) => PRE + '/note/'+noteId;
 export const DELETE_NOTE = (noteId) => PRE + '/note/'+noteId;
 export const USER_LOGIN = PRE + '/user/login';
+export const USER_INFO = PRE + '/user/userinfo';
+
+export const SEARCH_NOTE = (userId,text) => `${PRE}/query?userId=${userId}&text=${text}`;

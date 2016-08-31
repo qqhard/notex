@@ -86,3 +86,14 @@ export const deleteNote = (noteId) => {
         })
     }
 }
+
+export const searchNote = (userId,text) => {
+    return (dispatch)=> {
+        $.get(urls.SEARCH_NOTE(userId, text),function (data) {
+            dispatch({
+                type: types.SEARCH_NOTE_SUCCESS,
+                notes: data
+            });
+        });
+    }
+}

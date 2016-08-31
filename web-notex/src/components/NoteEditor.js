@@ -25,7 +25,7 @@ class NoteEditor extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-
+        eve.searchNote(nextProps);
     }
 
     render() {
@@ -96,7 +96,7 @@ class NoteEditor extends React.Component {
         eve.showNote(this.props);
         eve.newNote(this.props);
         eve.addNote(this.props);
-        eve.searchNote(this.props);
+
         eve.deleteNote(this.props);
     }
 }
@@ -209,11 +209,9 @@ let eve = {
         $('#J_SearchInput').keydown(function(ev) {
             var ev=ev||window.event;
             if(ev.keyCode === 13) {
-                let note = {
-                    userId: '1',
-                    text: ev.target.value
-                }
-                props.getNote(note);/////////
+                console.log(props.user);
+                console.log(ev.target.value);
+                props.searchNote(props.user.userId,ev.target.value);
                 $('#J_SearchInput').removeClass('block');
                 $('#J_SearchInput').addClass('none');
                 $('.search-input').val('');

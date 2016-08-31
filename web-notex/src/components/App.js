@@ -1,6 +1,6 @@
 import React from 'react';
-import * as urls from './constant/urls';
-import { setUserId } from './actions/user';
+import * as urls from './../constant/urls';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class App extends React.Component {
     }
     
     componentWillMount(){
-
+        this.props.getUser();
     }
 
     render() {

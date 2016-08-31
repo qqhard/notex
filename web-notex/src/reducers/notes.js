@@ -9,6 +9,10 @@ const notes = (state = {}, action) => {
             return {
                 notes: action.notes
             }
+        case types.SEARCH_NOTE_SUCCESS:
+            return {
+                notes: action.notes
+            }
         default:
             return state
     }

@@ -32,13 +32,13 @@
 }
 .search {
 	position: absolute;
-	left: 22px;
-	top: 306px;
+	left: 219px;
+	top: 42px;
 	width: 200px;
 	height: 30px;
 	border-radius: 30px;
-	background-color: #7bb7fa;
-	border: 1px solid #672b00;
+	background-color: #fff;
+	border: 2px solid #7bb7fa;;
 	z-index: 99;
 	text-align: center;
 }
@@ -46,13 +46,14 @@
 	border: none;
 	width: 170px;
 	height: 25px;
-	background-color: #7bb7fa;
+	background-color: #fff;
 	outline: none;
 }
 
 /*list*/
 
 .list {
+	position: relative;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -71,7 +72,6 @@
 .num {
 	height: 60px;
 	width: 100%;
-	margin-top: 20px;
 	line-height: 60px;
 	font-size: 13px;
 	color: #ababab;
@@ -173,6 +173,13 @@
 	font-size: 18px;
 	margin-top: -50px;
 	resize: none;
+}
+
+.list .ssh {
+	position: absolute;
+	top: 2px;
+	left: 140px;
+	color: #7bb7fa;
 }
 
 /*预览*/

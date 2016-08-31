@@ -17,18 +17,18 @@ var user = {
     password: '123',
 }
 
-$.ajax({
-    url: urls.USER_LOGIN,
-    data:  JSON.stringify(user),
-    type: "POST",
-    contentType: "application/json",
-    async: false,
-    success: function (data) {
-        user.userId = data.userId;
-    }
-});
-
-console.log(user);
+// $.ajax({
+//     url: urls.USER_LOGIN,
+//     data:  JSON.stringify(user),
+//     type: "POST",
+//     contentType: "application/json",
+//     async: false,
+//     success: function (data) {
+//         user.userId = data.userId;
+//     }
+// });
+//
+// console.log(user);
 
 class NoteEditor extends React.Component {
     constructor(props) {

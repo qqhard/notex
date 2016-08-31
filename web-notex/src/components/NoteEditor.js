@@ -26,6 +26,21 @@ class NoteEditor extends React.Component {
 
     componentWillReceiveProps(nextProps){
         eve.searchNote(nextProps);
+        eve.addNote(nextProps);
+    }
+
+    title(){
+        if(!!this.props.note){
+            return this.props.note.title;
+        }
+        return '';
+    }
+
+    text(){
+        if(!!this.props.note){
+            return this.props.note.text;
+        }
+        return '';
     }
 
     render() {
@@ -48,11 +63,11 @@ class NoteEditor extends React.Component {
             });
         }
 
-        let firstOne = {};
         let length = '';
         if (!!this.props.notes){
             length = this.props.notes.length;
         }
+
         return (
             <div className='box'>
                 <input type='hidden' id='J_AAC' defaultValue='0' />
@@ -75,13 +90,13 @@ class NoteEditor extends React.Component {
                         <input id='J_Title' className='md-title'
                             type='text'
                             placeholder='请输入标题'
-                            value={this.props.edit.title||''}
+                            value={this.title()}
                             onChange={e=>this.handleChangeTitle(e)}
                         />
                         <a href='javascript:;' id='J_ShowMd' className='iconfont icon-yulan'></a>
-                        <a href='javascript:;' id='J_Save' className='iconfont icon-baocun'></a>
+                        <a href='javascript:;' onClick={()=>this.props.putNote(this.props.note)} className='iconfont icon-baocun'></a>
                     </div>
-                    <textarea className='textarea' id='J_Mark' placeholder='请输入内容' style={styles.heights} value={this.props.edit.text||''}
+                    <textarea className='textarea' id='J_Mark' placeholder='请输入内容' style={styles.heights} value={this.text()}
                         onChange={e=>this.handleChangeText(e)}
                     ></textarea>
                 </div>
@@ -95,7 +110,7 @@ class NoteEditor extends React.Component {
         eve.translateMd();
         eve.showNote(this.props);
         eve.newNote(this.props);
-        eve.addNote(this.props);
+
 
         eve.deleteNote(this.props);
     }
@@ -155,8 +170,8 @@ let eve = {
             }
             let title = child.children[0].innerHTML;
             let text = child.children[2].innerHTML;
-            props.editTitle(title);
-            props.editText(text);
+            let noteId = child.children[4].value;
+            props.getNote(noteId);
             const content = $('#J_Mark').val();
             let right = $('#J_Right');
             let hCon = marked(content);
@@ -178,26 +193,14 @@ let eve = {
     },
     addNote: function(props) {
         $('#J_Save').click(function() {
-            let title = $('#J_Title').val();
-            let text = $('#J_Mark').val();
             if($('#J_AAC').val() === 1) {//增加
-                let note = {
-                    userId: '1',
-                    title: title,
-                    text: text
-                };
-                console.log(note);
-                props.postNote(note);//////
+                let note = props.note;
+                props.postNote(note);
 
             } else { //修改
-                let noteId = $('#J_AAC').val();
-                let note = {
-                    userId: '1',
-                    title: title,
-                    text: text,
-                    noteId: noteId
-                };
-                props.putNote(note);////
+                let note = props.note;
+                console.log(note);
+               // props.putNote(note);////
             }
         })
     },

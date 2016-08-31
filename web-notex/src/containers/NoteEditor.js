@@ -9,8 +9,7 @@ import { editTitle, editText } from '../actions/edit';
 const mapStateToProps = (state) => {
     return {
         notes: state.notes.notes,
-        note: state.note.note,
-        edit: state.edit,
+        note: state.note,
         user: state.user,
     }
 }

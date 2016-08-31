@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import App from './containers/App';
 import NoteEditor from './containers/NoteEditor';
+import NoteShow from './containers/NoteShow';
 
 const loggerMiddleware = createLogger();
 
@@ -26,6 +27,7 @@ render((
             <Route path="/" component={App}>
                 <IndexRoute component={NoteEditor} />
                 <Route path="notes.html" component={NoteEditor}/>
+                <Route path="note-:noteId.html" component={NoteShow}/>
             </Route>
         </Router>
     </Provider>

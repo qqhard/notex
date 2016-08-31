@@ -8,7 +8,7 @@ var TYPE_REGISTER = 'REGISTER';
 var TYPE_LOGOUT = 'LOGOUT';
 var STATUS_OK = 1;
 var STATUS_FAIL = 0;
-var PRE_URL = 'http://localhost:8080';
+var PRE_URL = 'http://yuanbiji.com/api';
 
 var userId = null;
 var gUsername = null;
@@ -16,6 +16,8 @@ var gUsername = null;
 function textParse(text) {
     return text.replace(/(^\s*)|(\s*$)/g, "");
 }
+
+console.log('test');
 
 chrome.contextMenus.create({
     title:'增添笔记',
@@ -42,7 +44,7 @@ function pushNote(text, title, url) {
     };
 
     $.ajax({
-        url:"http://localhost:8080/note",
+        url: PRE_URL+"/note",
         data: JSON.stringify(note),
         type: "POST",
         contentType: "application/json",
@@ -58,7 +60,7 @@ function removeNote(noteId) {
         return ;
     }
     $.ajax({
-        url:"http://localhost:8080/note/"+noteId,
+        url: PRE_URL+"/note/"+noteId,
         type: "DELETE",
         contentType: "application/json",
         success: function (data) {
@@ -117,7 +119,7 @@ function startListeners() {
 
     chrome.webRequest.onBeforeRequest.addListener(function (details) {
         var query = details.url.match(/.*wd=(.*?)[&$]/)[1];
-        $.get("http://localhost:8080/query?userId="+userId+"&text="+query,function (notes) {
+        $.get(PRE_URL+"/query?userId="+userId+"&text="+query,function (notes) {
             chrome.tabs.sendMessage(details.tabId, notes);
         });
     },{

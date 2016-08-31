@@ -29,7 +29,7 @@ public class NoteAction {
 	
 	
 	@RequestMapping(value="/notes/{userId}", method=RequestMethod.GET)
-	public Object gets2(@PathVariable("userId") String userId, HttpSession httpSession){
+	public Object gets2(@PathVariable("userId") String userId){
 		if(userId == null){
 			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
 		}

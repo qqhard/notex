@@ -45,7 +45,7 @@ public class SearchService {
 		fields.put("text", note.getText());
 		fields.put("url", note.getUrl());	
 		fields.put("time", note.getTime());
-		fields.put("tags", "");
+		fields.put("tags", note.getTags());
 		return fields;
 	}
 	

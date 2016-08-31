@@ -9,7 +9,7 @@ import com.hankcs.hanlp.HanLP;
 public class TestTextRank {
 	@Test
 	public void test(){
-		String content = "程序员(英文Programmer)是从事程序开发、维护的专业人员。一般将程序员分为程序设计人员和程序编码人员，但两者的界限并不非常清楚，特别是在中国。软件从业人员分为初级程序员、高级程序员、系统分析员和项目经理四大类。";
+		String content = "《Chrome扩展及应用开发》是第一本讲解如何开发Chrome扩展和应用的系统教程。全书共十章，分为两大部分，分别是扩展和...本书提供了大量实例，并结合实例详细生动地讲解相关知识在实践中的应用，加深读者对知识的理解。";
 		List<String> keywordList = HanLP.extractKeyword(content, 3);
 		System.out.println(keywordList);
 	}

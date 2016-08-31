@@ -45,7 +45,6 @@ public class NoteAction {
 	@RequestMapping(value="/note", method=RequestMethod.POST)
 	public Note post(@RequestBody Note note){
 		note.setTags(tagService.getKeyWords(note.getText(), 3));
-		
 		noteRepository.save(note);
 		searchService.pushNote(note);
 		return note;

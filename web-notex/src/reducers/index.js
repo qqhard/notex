@@ -5,12 +5,13 @@ import {combineReducers} from 'redux';
 import note from './note';
 import notes from './notes';
 import edit from './edit';
-
+import user from './user';
 
 const notexApp = combineReducers({
     note,
     notes,
-    edit
+    edit,
+    user
 });
 
 export default notexApp;

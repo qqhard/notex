@@ -107,7 +107,7 @@ document.onkeydown = function () {
             ");
             $('body').append(alert);
             setTimeout(function(){
-                $(alert)1.remove();
+                $(alert).remove();
             }, 3000);
             selection = null;
         }

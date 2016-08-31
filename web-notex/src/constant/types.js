@@ -12,3 +12,6 @@ export const GET_DATA_FAIL = 'GET_DATA_FAIL';
 
 export const EDIT_TITLE = 'EDIT_TITLE';
 export const EDIT_TEXT = 'EDIT_TEXT';
+
+
+export const USER_ID = 'USER_ID';

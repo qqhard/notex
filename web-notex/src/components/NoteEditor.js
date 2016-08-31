@@ -10,7 +10,24 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import './dark.css';
 import './defaultStyle.css';
+import * as urls from '../constant/urls';
 
+var user = {
+    username: 'hard',
+    password: '123',
+}
+$.ajax({
+    url: urls.USER_LOGIN,
+    data:  JSON.stringify(user),
+    type: "POST",
+    contentType: "application/json",
+    async: false,
+    success: function (data) {
+        user.userId = data.userId;
+    }
+});
+
+console.log(user);
 
 class NoteEditor extends React.Component {
     constructor(props) {

@@ -7,28 +7,9 @@
  */
 
 import React from 'react';
-import { browserHistory } from 'react-router';
 import './dark.css';
 import './defaultStyle.css';
-import * as urls from '../constant/urls';
 
-var user = {
-    username: 'hard',
-    password: '123',
-}
-
-// $.ajax({
-//     url: urls.USER_LOGIN,
-//     data:  JSON.stringify(user),
-//     type: "POST",
-//     contentType: "application/json",
-//     async: false,
-//     success: function (data) {
-//         user.userId = data.userId;
-//     }
-// });
-//
-// console.log(user);
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -112,7 +93,7 @@ class NoteEditor extends React.Component {
         eve.getNotes(this.props);
         eve.showMd();
         eve.translateMd();
-        eve.showNote();
+        eve.showNote(this.props);
         eve.newNote(this.props);
         eve.addNote(this.props);
         eve.searchNote(this.props);
@@ -158,7 +139,7 @@ let eve = {
     getNotes: function(props) {
         props.getNotes();/////////
     },
-    showNote: function() {
+    showNote: function(props) {
         let _this = this;
         $('#J_List').click(function(e) {
             let target = e.target.tagName.toLowerCase();
@@ -174,8 +155,8 @@ let eve = {
             }
             let title = child.children[0].innerHTML;
             let text = child.children[2].innerHTML;
-            $('#J_Title').val(title);
-            $('#J_Mark').val(text);
+            props.editTitle(title);
+            props.editText(text);
             const content = $('#J_Mark').val();
             let right = $('#J_Right');
             let hCon = marked(content);

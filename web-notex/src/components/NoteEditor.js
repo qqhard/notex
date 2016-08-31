@@ -51,7 +51,7 @@ class NoteEditor extends React.Component {
                     <li className='list-li' key={index}>
                         <a href='javascript:;'>
                             <h3 className='name'>{val.title}</h3>
-                            <p className='list-time'>{val.time}</p>
+                            <p className='list-time'>{eve.timeFormat(val.time)}</p>
                             <p className='list-content'>{val.text}</p>
                             <div className='delete'>
                                 <span className='iconfont icon-xiao10'></span>
@@ -64,8 +64,13 @@ class NoteEditor extends React.Component {
         }
 
         let length = '';
+        let userName = ''
         if (!!this.props.notes){
             length = this.props.notes.length;
+        }
+
+        if (!! this.props.user) {
+            userName = this.props.user.username;
         }
 
         return (
@@ -73,6 +78,7 @@ class NoteEditor extends React.Component {
                 <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
+                    <div>{userName}</div>
                     <div id='J_SearchInput' className='search none'>
                         <input className='search-input' placeholder="输入查询字段"/>
                     </div>
@@ -117,6 +123,20 @@ class NoteEditor extends React.Component {
 }
 
 let eve = {
+    fun: function(val) {
+        if (val < 10)return '0' + val;
+        return val;
+    },
+    timeFormat: function(time) {
+        var now = new Date(time);
+        var year = now.getFullYear();
+        var month = this.fun(now.getMonth() + 1);
+        var date = this.fun(now.getDate());
+        var hour = this.fun(now.getHours());
+        var minute = this.fun(now.getMinutes());
+        var second = this.fun(now.getSeconds());
+        return year + "年" + month + "月" + date + "日  " + hour + ":" + minute + ":" + second;
+    },
     showMd: function() {
         let _this = this;
         $('#J_ShowMd').click(function(e) {

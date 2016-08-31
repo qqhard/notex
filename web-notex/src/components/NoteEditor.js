@@ -240,7 +240,7 @@ let eve = {
             if(e.target.tagName.toLowerCase() === 'div') {
                 let list = e.target.parentNode.parentNode;
                 let note = e.target.nextSibling.value;
-                props.deleteNote(note);/////
+                props.deleteNote(note);
                 $(list).remove();
             }
         });

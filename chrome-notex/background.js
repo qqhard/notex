@@ -20,59 +20,18 @@ function textParse(text) {
 chrome.contextMenus.create({
     title:'增添笔记',
     contexts:['selection'],
+    onclick:function(data,tab){
+        if(data.selectionText!=null && data.selectionText.length > 0) {
+            pushNote(data.selectionText, tab.title, tab.url);
+        }
+    }
 });
-
-chrome.contextMenus.onClicked.addListener(function(){
-    console.log('test');
-});
-
-console.log('test');
-//test
-// var note = {userId:"1",text:"采用PPpd\n",title:null,url:"www",tags:"",time:0};
-// $.ajax({
-//     url:"http://localhost:8080/note",
-//     data: JSON.stringify(note),
-//     type: "POST",
-//     contentType: "application/json",
-//     success: function (data) {
-//         console.log(data);
-//     }
-// });
-//
-// var note = {noteId:"1",userId:"1",text:"heheheh\n",title:null,url:"www",tags:"",time:0};
-// $.ajax({
-//     url:"http://localhost:8080/note/"+"1",
-//     data: JSON.stringify(note),
-//     type: "PUT",
-//     contentType: "application/json",
-//     success: function (data) {
-//         console.log(data);
-//     }
-// });
-//
-// setTimeout(function () {
-//     $.ajax({
-//         url:"http://localhost:8080/note/"+"1",
-//         type: "DELETE",
-//         contentType: "application/json",
-//         success: function (data) {
-//             console.log(data);
-//         }
-//     });
-// },500);
-//
-// var user = {
-//     username:'abc',
-//     password:'123',
-// }
-
-
-//$.get('http://localhost:8080/user/logout');
-
-//test
 
 function pushNote(text, title, url) {
-    if(userId == null)return ;
+    if(userId == null){
+        console.log('用户未登陆！')
+        return ;
+    }
     var note = {
         userId: userId,
         text: textParse(text),
@@ -94,7 +53,10 @@ function pushNote(text, title, url) {
 }
 
 function removeNote(noteId) {
-    if(userId == null)return ;
+    if(userId == null){
+        console.log('用户未登陆！')
+        return ;
+    }
     $.ajax({
         url:"http://localhost:8080/note/"+noteId,
         type: "DELETE",

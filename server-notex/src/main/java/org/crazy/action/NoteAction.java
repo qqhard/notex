@@ -1,7 +1,5 @@
 package org.crazy.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.crazy.model.Note;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.hankcs.hanlp.HanLP;
 
 @RestController
 public class NoteAction {

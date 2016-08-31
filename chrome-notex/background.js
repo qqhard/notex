@@ -17,8 +17,6 @@ function textParse(text) {
     return text.replace(/(^\s*)|(\s*$)/g, "");
 }
 
-console.log('test');
-
 chrome.contextMenus.create({
     title:'增添笔记',
     contexts:['selection'],
@@ -31,7 +29,6 @@ chrome.contextMenus.create({
 
 function pushNote(text, title, url) {
     if(userId == null){
-        console.log('用户未登陆！')
         return ;
     }
     var note = {
@@ -51,7 +48,7 @@ function pushNote(text, title, url) {
         success: function (data) {
             console.log(data);
         }
-    })
+    });
 }
 
 function removeNote(noteId) {

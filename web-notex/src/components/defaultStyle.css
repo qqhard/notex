@@ -193,6 +193,7 @@
 	left: 0;
 	right: 907px;
 	background-color: #7bb7fa;
+	z-index: 100;
 }
 
 /*js*/

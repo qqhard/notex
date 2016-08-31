@@ -30,7 +30,7 @@ body {
     padding: 20px 50px;
     background-color: rgba(123, 183, 250, 0.7);
     color: #672b00;
-    z-index: 302;
+    z-index: 9999;
 }
 .index .post-title {
     font-size: 1.4em;

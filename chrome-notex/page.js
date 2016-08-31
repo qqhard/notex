@@ -108,14 +108,11 @@ document.onkeydown = function () {
         if (selection != null) {
             send(selection);
             var alert = $("\
-                <div class='yuanbiji_alert_zz'>\
-                    <h3>您的选中已保存至猿笔记</h3>\
-                </div>\
-            ");
-            $('body').append(alert);
-            setTimeout(function(){
-                $(alert).remove();
-            }, 3000);
+            <div class='yuanbiji_alert_zz'>\
+                <h3>您的选中已保存至猿笔记</h3>\
+            </div>\
+        ");
+        $('body').append(alert);
             selection = null;
         }
     }

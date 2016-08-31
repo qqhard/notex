@@ -48,16 +48,20 @@ class NoteEditor extends React.Component {
             });
         }
 
-        let firstOne = {};
         let length = '';
+        let userName = ''
         if (!!this.props.notes){
             length = this.props.notes.length;
+        }
+        if (!! this.props.user) {
+            userName = this.props.user.username;
         }
         return (
             <div className='box'>
                 <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
+                    <div>{userName}</div>
                     <div id='J_SearchInput' className='search none'>
                         <input className='search-input' placeholder="输入查询字段"/>
                     </div>

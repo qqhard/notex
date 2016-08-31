@@ -13,8 +13,8 @@ import './defaultStyle.css';
 import * as urls from '../constant/urls';
 
 var user = {
-    username: 'hard',
-    password: '123',
+    username: 'xiaoruo',
+    password: '123456',
 }
 $.ajax({
     url: urls.USER_LOGIN,
@@ -43,7 +43,7 @@ class NoteEditor extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        
+
     }
 
     render() {
@@ -76,7 +76,6 @@ class NoteEditor extends React.Component {
                 <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
-                    <a href="javascript:;"></a>
                     <a href='javascript:;' id='J_Add' className='iconfont icon-tianjia'></a>
                     <a href='javascript:;' id='J_Search' className='iconfont icon-sousuo'></a>
                     <div id='J_SearchInput' className='search none'>

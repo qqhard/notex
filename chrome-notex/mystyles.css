@@ -9,14 +9,14 @@ body {
 .index {
     margin-bottom: 20px;
 }
-.readmore {
+.index .readmore {
     margin: 10px 0 10px -20px;
 }
-a.iconfont {
+.index a.iconfont {
     color: #7bb7fa;
     margin-left: 20px;
 }
-a.iconfont:hover {
+.index a.iconfont:hover {
     color: red
 }
 .index a {
@@ -32,15 +32,15 @@ a.iconfont:hover {
     color: #672b00;
     z-index: 302;
 }
-.post-title {
+.index .post-title {
     font-size: 1.4em;
     font-weight: normal;
     color: #000; }
-.post-title a {
+.index .post-title a {
     color: inherit; }
-.post-title a:hover {
+.index .post-title a:hover {
     border-bottom: 2px solid #672b00; }
-.post-meta .post-tags span {
+.index .post-meta .post-tags span {
     padding: 1px 3px;
     border: 1px solid #ccc;
     border-radius: 3px;

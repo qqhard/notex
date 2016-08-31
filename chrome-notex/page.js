@@ -71,7 +71,7 @@ function htmlNote(note) {
             <div class='post-meta'>" + timeFormat(note.time) + "<span class='post-tags'> ." + tool + "</span></div>\
             <div class='post-content'><p>" + note.text + "</p></div>\
             <p class='readmore' noteId='" + note.noteId + "'>\
-                <a href='javascript:;' class='editNote iconfont icon-xiugai'></a>\
+                <a href='http://yuanbiji.com/' class='editNote iconfont icon-xiugai'></a>\
                 <a href='javascript:;' class='removeNote iconfont icon-xiao10'></a>\
                 <a href='javascript:;' class='iconfont icon-shengxu'></a>\
                 <a href='javascript:;' class='iconfont icon-jiangxu'></a>\

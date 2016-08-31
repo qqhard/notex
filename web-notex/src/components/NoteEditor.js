@@ -77,14 +77,13 @@ class NoteEditor extends React.Component {
                 <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
-                    <a href='javascript:;' id='J_Add' className='iconfont icon-tianjia'></a>
-                    <a href='javascript:;' id='J_Search' className='iconfont icon-sousuo'></a>
                     <div id='J_SearchInput' className='search none'>
-                        <input className='search-input' />
+                        <input className='search-input' placeholder="输入查询字段"/>
                     </div>
                 </div>
                 <div className='list' style={styles.height}>
                     <h2 className='list-title'>猿笔记</h2>
+                    <a href='javascript:;' id='J_Search' className='ssh iconfont icon-sousuo'></a>
                     <p className='num'><span>{length}</span>条笔记</p>
                     <ul id='J_List' className='list-box'>
                         {list}
@@ -236,6 +235,7 @@ let eve = {
                 props.getNote(note);/////////
                 $('#J_SearchInput').removeClass('block');
                 $('#J_SearchInput').addClass('none');
+                $('.search-input').val('');
             }
         })
     },

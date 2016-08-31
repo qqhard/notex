@@ -64,4 +64,13 @@ public class TestNoteRepository {
 			System.out.println(note);
 		}
 	}
+	
+	@Test
+	public void testFindByUserIdSortByTimeDesc(){
+		String userId = "123";
+		List<Note> notes = noteRepository.findByUserIdOrderByTimeDesc(userId);
+		for(Note note : notes){//1472463797907
+			System.out.println(note);
+		}
+	}
 }

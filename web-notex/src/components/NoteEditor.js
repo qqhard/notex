@@ -113,7 +113,7 @@ class NoteEditor extends React.Component {
         eve.showMd();
         eve.translateMd();
         eve.showNote();
-        eve.newNote();
+        eve.newNote(this.props);
         eve.addNote(this.props);
         eve.searchNote(this.props);
         eve.deleteNote(this.props);
@@ -185,12 +185,14 @@ let eve = {
 
         })
     },
-    newNote: function() {
+    newNote: function(props) {
         $('#J_Add').click(function() {
             $('#J_AAC').val('1');
             $('#J_Title').val('');
             $('#J_Mark').val('');
             $('#J_Title').focus();
+            props.editTitle("");
+            props.editText("");
         });
     },
     addNote: function(props) {
@@ -203,6 +205,7 @@ let eve = {
                     title: title,
                     text: text
                 };
+                console.log(note);
                 props.postNote(note);//////
 
             } else { //修改

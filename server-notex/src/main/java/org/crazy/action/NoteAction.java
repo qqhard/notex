@@ -33,7 +33,7 @@ public class NoteAction {
 		if(userId == null){
 			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
 		}
-		return noteRepository.findByUserId(userId);
+		return noteRepository.findByUserIdOrderByTimeDesc(userId);
 	}
 	
 	@RequestMapping(value="/note", method=RequestMethod.GET)
@@ -42,7 +42,7 @@ public class NoteAction {
 		if(userId == null){
 			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
 		}
-		return noteRepository.findByUserId(userId);
+		return noteRepository.findByUserIdOrderByTimeDesc(userId);
 	}
 	
 	@RequestMapping(value="/note/{noteId}", method=RequestMethod.GET)

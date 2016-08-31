@@ -12,4 +12,5 @@ public interface NoteRepository extends MongoRepository<Note, String> {
 	public Note findByUrl(@Param("url") String url);
 	public List<Note> findByUserId(String userId);
 	public Page<Note> findByUserId(String userId,Pageable pagable);
+	public List<Note> findByUserIdOrderByTimeDesc(String userId);
 }

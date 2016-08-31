@@ -36,7 +36,7 @@ class NoteEditor extends React.Component {
                     <li className='list-li' key={index}>
                         <a href='javascript:;'>
                             <h3 className='name'>{val.title}</h3>
-                            <p className='list-time'>{val.time}</p>
+                            <p className='list-time'>{eve.timeFormat(val.time)}</p>
                             <p className='list-content'>{val.text}</p>
                             <div className='delete'>
                                 <span className='iconfont icon-xiao10'></span>
@@ -106,6 +106,20 @@ class NoteEditor extends React.Component {
 }
 
 let eve = {
+    fun: function(val) {
+        if (val < 10)return '0' + val;
+        return val;
+    },
+    timeFormat: function(time) {
+        var now = new Date(time);
+        var year = now.getFullYear();
+        var month = this.fun(now.getMonth() + 1);
+        var date = this.fun(now.getDate());
+        var hour = this.fun(now.getHours());
+        var minute = this.fun(now.getMinutes());
+        var second = this.fun(now.getSeconds());
+        return year + "年" + month + "月" + date + "日  " + hour + ":" + minute + ":" + second;
+    },
     showMd: function() {
         let _this = this;
         $('#J_ShowMd').click(function(e) {

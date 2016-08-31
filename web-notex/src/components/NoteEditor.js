@@ -214,7 +214,6 @@ let eve = {
                 props.searchNote(props.user.userId,ev.target.value);
                 $('#J_SearchInput').removeClass('block');
                 $('#J_SearchInput').addClass('none');
-                $('.search-input').val('');
             }
         })
     },

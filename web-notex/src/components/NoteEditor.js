@@ -13,9 +13,10 @@ import './defaultStyle.css';
 import * as urls from '../constant/urls';
 
 var user = {
-    username: 'xiaoruo',
-    password: '123456',
+    username: 'hard',
+    password: '123',
 }
+
 $.ajax({
     url: urls.USER_LOGIN,
     data:  JSON.stringify(user),
@@ -59,7 +60,7 @@ class NoteEditor extends React.Component {
                             <div className='delete'>
                                 <span className='iconfont icon-xiao10'></span>
                             </div>
-                            <input id='J_NoteId' type='hidden' value={index+1}/>
+                            <input id='J_NoteId' type='hidden' value={val.noteId}/>
                         </a>
                     </li>
                 );

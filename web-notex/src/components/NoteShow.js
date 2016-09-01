@@ -23,7 +23,8 @@ class NoteShow extends React.Component {
 
     noteHtml(){
         var {note} = this.props;
-        if(!!note){
+        console.log(note);
+        if(!!note && !!note.text){
             return marked(note.text);
         }
         return '';

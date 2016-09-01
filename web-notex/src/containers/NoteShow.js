@@ -7,7 +7,7 @@ import { getNote } from '../actions/data';
 
 const mapStateToProps = (state) => {
     return {
-        note: state.note.note,
+        note: state.note,
     }
 }
 

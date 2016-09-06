@@ -1,15 +1,7 @@
-/**
- * Created by hard on 16-8-27.
- */
-
-/**
- * 1.
- */
-
 import React from 'react';
 import './dark.css';
 import './defaultStyle.css';
-
+import marked from 'marked';
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -25,6 +17,7 @@ class NoteEditor extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
+
         eve.searchNote(nextProps);
         eve.addNote(nextProps);
     }
@@ -77,6 +70,7 @@ class NoteEditor extends React.Component {
             <div className='box'>
                 <input type='hidden' id='J_AAC' defaultValue='0' />
                 <div className='menu' style={styles.height}>
+                    <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
                     <div>{userName}</div>
                     <div id='J_SearchInput' className='search none'>
@@ -172,7 +166,7 @@ let eve = {
         })
     },
     getNotes: function(props) {
-        props.getNotes();/////////
+        props.getNotes(props.auth.getUserid());
     },
     showNote: function(props) {
         let _this = this;

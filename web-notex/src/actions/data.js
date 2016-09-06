@@ -5,9 +5,9 @@ import * as types from '../constant/types';
 import * as urls from '../constant/urls';
 import { browserHistory } from 'react-router';
 
-export const getNotes = () => {
+export const getNotes = (userId) => {
     return (dispatch)=> {
-        $.get(urls.GET_NOTES, (data)=> {
+        $.get(urls.GET_NOTES(userId), (data)=> {
             let notes = data;
             dispatch({
                 type: types.GET_NOTES_SUCCESS,

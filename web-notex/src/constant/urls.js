@@ -2,8 +2,8 @@
  * Created by hard on 16-8-27.
  */
 
-const PRE = 'http://yuanbiji.com/api';
-export const GET_NOTES = PRE + '/note';
+const PRE = 'http://yuanbiji.com/api'
+export const GET_NOTES = (userId) => `${PRE}/notes/${userId}`;
 
 export const GET_NOTE = (noteId) => PRE + '/note/'+noteId;
 export const POST_NOTE = PRE + '/note/';

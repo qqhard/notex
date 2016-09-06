@@ -1,0 +1,23 @@
+
+.note_show_title {
+    width: 60%;
+    height: 50px;
+    font-size: 30px;
+    border: none;
+    border-bottom: 2px solid #672b00;
+    color: #672b00;
+    margin-left: 50px;
+    outline: none;
+    resize: none;
+}
+
+.note_show_text {
+    box-sizing: border-box;
+    padding: 40px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 907px;
+    font-size: 18px;
+    z-index: 100;
+}

@@ -1,13 +1,26 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const dotenv = require('dotenv');
+const envVariables = dotenv.config();
+
+const defines = Object.keys(envVariables)
+    .reduce((memo, key) => {
+        const val = JSON.stringify(envVariables[key]);
+        memo[`__${key.toUpperCase()}__`] = val;
+        return memo;
+    }, {
+    });
+
+
+
 module.exports = {
     context: __dirname + "/src",
     entry: {
         index: './index.js'
     },
     output: {
-        path: __dirname + '/build/js',
+        path: __dirname + '/build',
         filename: '[name].js'
     },
     resolve: {
@@ -35,13 +48,14 @@ module.exports = {
     plugins: [
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
-            filename: '../../index.html',
+            filename: 'index.html',
             template: 'index.html',
             inject:'body',
             minify:{
                 removeComments:true,
                 collapseWhitespace:true
             }
-        })
+        }),
+        new webpack.DefinePlugin(defines)
     ]
 };

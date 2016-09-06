@@ -1,14 +1,10 @@
 package org.crazy.action;
 
-import javax.servlet.http.HttpSession;
-
 import org.crazy.model.Note;
 import org.crazy.repository.NoteRepository;
 import org.crazy.sevice.SearchService;
 import org.crazy.sevice.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +25,7 @@ public class NoteAction {
 	
 	
 	@RequestMapping(value="/notes/{userId}", method=RequestMethod.GET)
-	public Object gets2(@PathVariable("userId") String userId){
-		if(userId == null){
-			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
-		}
-		return noteRepository.findByUserIdOrderByTimeDesc(userId);
-	}
-	
-	@RequestMapping(value="/note", method=RequestMethod.GET)
-	public Object gets(HttpSession httpSession){
-		String userId = (String) httpSession.getAttribute("userId");
-		if(userId == null){
-			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
-		}
+	public Object gets(@PathVariable("userId") String userId){
 		return noteRepository.findByUserIdOrderByTimeDesc(userId);
 	}
 	

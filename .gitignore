@@ -11,3 +11,11 @@ bower_components/
 build/
 node_modules/
 web-notex/index.html
+chrome-notexV2/background.js
+chrome-notexV2/page.js
+chrome-notexV2/popup.js
+chrome-notexV2/background.js.map
+chrome-notexV2/page.js.map
+chrome-notexV2/popup.js.map
+web-notex/.env
+

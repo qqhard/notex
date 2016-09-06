@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getNotes: ()=>dispatch(getNotes()),
+        getNotes: (userId)=>dispatch(getNotes(userId)),
         getNote: (noteId)=>dispatch(getNote(noteId)),
         postNote: (note)=>dispatch(postNote(note)),
         putNote: (note)=>dispatch(putNote(note)),

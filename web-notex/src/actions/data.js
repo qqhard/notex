@@ -55,7 +55,7 @@ export const postNote = (note) => {
     }
 }
 
-export const putNote = (note) => {
+export const putNote = (note,callBack = ()=>{}) => {
     return (dispatch)=> {
         $.ajax({
             url:urls.PUT_NOTE(note.noteId),
@@ -67,6 +67,7 @@ export const putNote = (note) => {
                     type: types.PUT_NOTE_SUCCESS,
                     note: data
                 });
+                callBack();
             }
         })
     }

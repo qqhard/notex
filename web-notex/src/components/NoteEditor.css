@@ -1,0 +1,58 @@
+
+.note_editor_head {
+    justify-content: center;
+    /*flex-direction: column;*/
+    width: 60%;
+}
+
+.note_editor_title {
+    height: 50px;
+    width: 100%;
+    font-size: 35px;
+    border: none;
+    border-bottom: 2px solid #646464;
+    color: #2dbe60;
+    padding-bottom: 10px;
+    outline: none;
+    resize: none;
+}
+
+.note_editor_utils {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.note_editor_util {
+    flex: 0.05;
+    margin-top: 0px;
+    color: #646464;
+    font-weight: lighter;
+    font-size: 25px;
+}
+
+.note_editor_text_yulan {
+    box-sizing: border-box;
+    padding: 20px 40px 0px;
+    font-size: 18px;
+    width: 70%;
+}
+
+.note_editor_text_edit {
+    box-sizing: border-box;
+    padding: 20px 40px 0px;
+    font-size: 18px;
+    border: none;
+    width: 70%;
+    outline: none;
+    font-size: 18px;
+    resize: none;
+}
+
+.note_editor_utils .icon-xiao10 {
+    color: #646464;
+}
+
+.note_editor_utils .icon-xiao10:hover {
+    color: red;
+}

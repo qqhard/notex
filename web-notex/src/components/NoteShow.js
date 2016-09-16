@@ -6,6 +6,7 @@ import './dark.css';
 import './defaultStyle.css';
 import marked from 'marked';
 import './NoteShow.css';
+import {hashHistory} from 'react-router';
 
 let styles = {
     height: {
@@ -17,48 +18,71 @@ let styles = {
 }
 
 class NoteShow extends React.Component {
-    componentDidMount(){
+    componentDidMount() {
         var {getNote} = this.props;
         var {noteId} = this.props.params;
         getNote(noteId);
+        let _this = this;
+        this.editor = editormd("editormd-view", {
+            path: "/bower_components/editor.md/lib/",
+            width: "90%",
+            height: "88%",
+            tex: true,
+            watch: false,
+            taskList: true,
+            codeFold: true,
+            toolbar: false,
+            readOnly: true,
+            onload: function () {
+                this.previewing();
+            }
+        });
 
     }
 
-    noteHtml(){
+    noteText() {
         var {note} = this.props;
-        if(!!note && !!note.text){
-            return marked(note.text);
-        }
+        if (!!note)return note.text;
         return '';
     }
 
-    noteTitle(){
+    noteTitle() {
         var {note} = this.props;
-        if(!!note && !!note.title){
+        if (!!note && !!note.title) {
             return note.title;
         }
-
         return '';
     }
 
-    componentDidUpdate(){
-        var codeBlock = document.querySelectorAll('code');
-        for(var i = codeBlock.length-1;i>=0;i--){
-            hljs.highlightBlock(codeBlock[i].parentNode);
-        }
+
+    handleClickEdit() {
+        let {note}= this.props;
+        hashHistory.push(`/noteEditor-${note.noteId}.html`);
     }
 
-    render(){
+    render() {
 
         return (
             <div className='box'>
-                <input type='hidden' id='J_AAC' defaultValue='0' />
+                <input type='hidden' id='J_AAC' defaultValue='0'/>
                 <div className='menu' style={styles.height}>
-                    <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png' />
+                    <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png'/>
                 </div>
                 <div className='content'>
-                    <div className = 'note_show_title'>{this.noteTitle()}</div>
-                    <div className = 'note_show_text' dangerouslySetInnerHTML={{__html: this.noteHtml()}}></div>
+                    <div className="note_show_head">
+                        <div className='note_show_title'>{this.noteTitle()}</div>
+                        <div className="note_show_utils">
+                            <span className="note_show_util iconfont icon-xiugai"
+                                  onClick={this.handleClickEdit.bind(this)}>
+                            </span>
+                            <span className="note_show_util iconfont icon-xiao10">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="editormd-view" key="editormd-view">
+                        <textarea style={{display: 'none'}} value={this.noteText()}></textarea>
+                    </div>
                 </div>
 
             </div>

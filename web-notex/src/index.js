@@ -7,8 +7,9 @@ import notexApp from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import App from './containers/App';
-import NoteEditor from './containers/NoteEditor';
+import Home from './containers/Home';
 import NoteShow from './containers/NoteShow';
+import NoteEditor from './containers/NoteEditor';
 import AuthService from './utils/AuthService';
 import Login from './containers/Login';
 import Welcome from './components/Welcome';
@@ -30,7 +31,6 @@ const requireAuth = (nextState, replace) => {
     }
 }
 
-
 const loggerMiddleware = createLogger();
 
 const store = createStore(
@@ -47,8 +47,9 @@ render((
         <Router history={hashHistory}>
             <Route path="/" component={App} auth={auth}>
                 <IndexRedirect to="welcome.html" />
-                <Route path="notes.html" component={NoteEditor} onEnter={requireAuth}/>
+                <Route path="notes.html" component={Home} onEnter={requireAuth}/>
                 <Route path="note-:noteId.html" component={NoteShow}/>
+                <Route path="noteEditor-:noteId.html" component={NoteEditor}/>
                 <Route path="login.html" component={Login}/>
                 <Route path="access_token=:token"/>
                 <Route path="welcome.html" component={Welcome}/>

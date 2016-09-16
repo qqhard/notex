@@ -11,7 +11,7 @@ const note = (state = {}, action) => {
                 url: action.note.url,
                 title: action.note.title,
                 text: action.note.text,
-                tags: action.note.tags,
+                tags: action.note.tags.split(','),
                 time: action.note.time,
                 userId: action.note.userId,
             }
@@ -21,7 +21,7 @@ const note = (state = {}, action) => {
                 url: action.note.url,
                 title: action.note.title,
                 text: action.note.text,
-                tags: action.note.tags,
+                tags: action.note.split(','),
                 time: action.note.time,
                 userId: action.note.userId,
             }
@@ -31,7 +31,7 @@ const note = (state = {}, action) => {
                 url: action.note.url,
                 title: action.note.title,
                 text: action.note.text,
-                tags: action.note.tags,
+                tags: action.note.tags.split(','),
                 time: action.note.time,
                 userId: action.note.userId,
             }
@@ -52,7 +52,7 @@ const note = (state = {}, action) => {
                 url: note.url,
                 title: note.title,
                 text: note.text,
-                tags: note.tags,
+                tags: note.tags.split(','),
                 time: note.time,
                 userId: note.userId,
             }
@@ -73,6 +73,33 @@ const note = (state = {}, action) => {
                 title: state.title,
                 text: action.text,
                 tags: state.tags,
+                time: state.time,
+                userId: state.userId,
+            }
+        case types.ADD_TAG:
+            let tags = state.tags;
+            tags.push(action.text);
+            return {
+                noteId: state.noteId,
+                url: state.url,
+                title: state.title,
+                text: state.text,
+                tags: tags,
+                time: state.time,
+                userId: state.userId,
+            }
+            break;
+        case types.REMOVE_TAG:
+            let tags2 = state.tags;
+            console.log(tags2);
+            tags2.splice(action.index, 1);
+            console.log(tags2);
+            return {
+                noteId: state.noteId,
+                url: state.url,
+                title: state.title,
+                text: state.text,
+                tags: tags2,
                 time: state.time,
                 userId: state.userId,
             }

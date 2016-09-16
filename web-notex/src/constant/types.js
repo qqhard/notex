@@ -14,6 +14,7 @@ export const SEARCH_NOTE_SUCCESS = 'SEARCH_NOTE_SUCCESS';
 
 export const EDIT_TITLE = 'EDIT_TITLE';
 export const EDIT_TEXT = 'EDIT_TEXT';
-
+export const ADD_TAG = 'ADD_TAG';
+export const REMOVE_TAG = 'REMOVE_TAG';
 
 export const USER_ID = 'USER_ID';

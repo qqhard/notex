@@ -2,9 +2,12 @@
  * Created by hard on 16-8-31.
  */
 import React from 'react';
+import TagInput from './TagInput';
 import './dark.css';
 import './defaultStyle.css';
 import './NoteEditor.css';
+import './reactTags.css';
+import Navigation from './Navigation';
 
 let styles = {
     height: {
@@ -61,10 +64,10 @@ class NoteEditor extends React.Component {
                     _this.setState({dirty: true});
                 });
                 var keyMap = {
-                    "Ctrl-S": function(cm) {
+                    "Ctrl-S": function (cm) {
                         _this.handleSave.bind(_this)();
                     },
-                    "Ctrl-A": function(cm) {
+                    "Ctrl-A": function (cm) {
                         cm.execCommand("selectAll");
                     }
                 };
@@ -75,7 +78,7 @@ class NoteEditor extends React.Component {
     }
 
     noteHtml() {
-        var {note} = this.props;
+        let {note} = this.props;
         if (!!note && !!note.text) {
             return marked(note.text);
         }
@@ -83,10 +86,12 @@ class NoteEditor extends React.Component {
     }
 
     noteText() {
-        var {note} = this.props;
+        let {note} = this.props;
         if (!!note)return note.text;
         return '';
     }
+
+
 
     noteTitle() {
         var {note} = this.props;
@@ -122,7 +127,7 @@ class NoteEditor extends React.Component {
     handleSave() {
         let {note, putNote} = this.props;
         note.text = this.editor.getValue();
-        putNote(note,()=>{
+        putNote(note, ()=> {
             this.setState({
                 dirty: false
             });
@@ -147,24 +152,32 @@ class NoteEditor extends React.Component {
     }
 
     render() {
-
+  
         return (
             <div className='box'>
-                <input type='hidden' id='J_AAC' defaultValue='0'/>
-                <div className='menu' style={styles.height}>
-                    <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png'/>
-                </div>
+                <Navigation />
                 <div className='content'>
                     <div className="note_editor_head">
                         <input className='note_editor_title' value={this.noteTitle()}
                                onChange={this.handleChangeTitle.bind(this)}/>
-                        <div className="note_editor_utils">
-                            <span className="note_editor_util iconfont icon-yulan" style={this.yulanStyle()}
-                                  onClick={this.handleModeChange.bind(this)}></span>
-                            <span className="note_editor_util iconfont icon-baocun" style={this.saveStyle()}
-                                  onClick={this.handleSave.bind(this)}></span>
-                            <span className="note_editor_util iconfont icon-xiao10"></span>
+                        <div className="note_editor_neck">
+                            <div className="note_editor_tags">
+                                <TagInput
+                                    tags={!!this.props.note?this.props.note.tags:''}
+                                    addTag = {this.props.addTag}
+                                    removeTag = {this.props.removeTag}
+                                />
+                            </div>
+                            <div className="note_editor_utils">
+
+                                <span className="note_editor_util iconfont icon-yulan" style={this.yulanStyle()}
+                                      onClick={this.handleModeChange.bind(this)}></span>
+                                <span className="note_editor_util iconfont icon-baocun" style={this.saveStyle()}
+                                      onClick={this.handleSave.bind(this)}></span>
+                                    <span className="note_editor_util iconfont icon-xiao10"></span>
+                            </div>
                         </div>
+
                     </div>
                     <div id="editormd" key="editormd">
                         <textarea style={{display: 'none'}} value={this.noteText()}></textarea>

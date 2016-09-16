@@ -18,3 +18,21 @@ export const editText = (text) => {
 		});
 	}
 }
+
+export const addTag = (text) => {
+	return (dispatch)=>{
+		dispatch({
+			type: types.ADD_TAG,
+			text: text,
+		});
+	}
+}
+
+export const removeTag = (index) => {
+	return (dispatch)=>{
+		dispatch({
+			type: types.REMOVE_TAG,
+			index: index,
+		});
+	}
+}

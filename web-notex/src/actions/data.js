@@ -55,7 +55,8 @@ export const postNote = (note) => {
     }
 }
 
-export const putNote = (note,callBack = ()=>{}) => {
+export const putNote = (note, callBack = ()=>{}) => {
+    note.tags = note.tags.join(',');
     return (dispatch)=> {
         $.ajax({
             url:urls.PUT_NOTE(note.noteId),

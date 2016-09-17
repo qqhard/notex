@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const dotenv = require('dotenv');
 const envVariables = dotenv.config();
@@ -39,8 +40,8 @@ module.exports = {
             loader: 'style!css!autoprefixer!sass'
         },{
             test: /\.css$/,
-            loader: 'style!css'
-        },{
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
+        ,{
             test: /\.(jpg|png)$/,
             loader: "url?limit=8192",
         }]
@@ -56,6 +57,7 @@ module.exports = {
                 collapseWhitespace:true
             }
         }),
-        new webpack.DefinePlugin(defines)
+        new webpack.DefinePlugin(defines),
+        new ExtractTextPlugin("style.bundle.css")
     ]
 };

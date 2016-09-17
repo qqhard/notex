@@ -2,8 +2,8 @@
  * Created by hard on 16-8-31.
  */
 import React from 'react';
-import './dark.css';
-import './defaultStyle.css';
+import './../styles/dark.css';
+import './../styles/defaultStyle.css';
 import { hashHistory } from 'react-router';
 
 let styles = {

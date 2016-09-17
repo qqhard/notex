@@ -1,6 +1,6 @@
 import React from 'react';
-import './dark.css';
-import './defaultStyle.css';
+import './../styles/dark.css';
+import './../styles/defaultStyle.css';
 import marked from 'marked';
 
 class NoteEditor extends React.Component {

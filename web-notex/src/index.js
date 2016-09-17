@@ -41,6 +41,7 @@ const store = createStore(
     )
 )
 
+document.body.parentNode.style.overflow="hidden";//隐藏且禁用
 
 render((
     <Provider store={store}>

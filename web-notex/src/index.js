@@ -10,6 +10,7 @@ import App from './containers/App';
 import Home from './containers/Home';
 import NoteShow from './containers/NoteShow';
 import NoteEditor from './containers/NoteEditor';
+import QueryNotes from './containers/QueryNotes';
 import AuthService from './utils/AuthService';
 import Login from './containers/Login';
 import Welcome from './components/Welcome';
@@ -49,6 +50,7 @@ render((
             <Route path="/" component={App} auth={auth}>
                 <IndexRedirect to="welcome.html" />
                 <Route path="notes.html" component={Home} onEnter={requireAuth}/>
+                <Route path="query.html" component={QueryNotes} />
                 <Route path="note-:noteId.html" component={NoteShow}/>
                 <Route path="noteEditor-:noteId.html" component={NoteEditor}/>
                 <Route path="login.html" component={Login}/>

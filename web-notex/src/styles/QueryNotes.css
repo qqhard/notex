@@ -1,0 +1,92 @@
+
+.query_note_context {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    border-top: 5px solid #7bb7fa;
+}
+
+.note_query_input {
+    transition: all 0.5s ease;
+    align-items: center;
+    width: 80%;
+    border: none;
+    border-bottom: 2px solid #7bb7fa;
+    margin-top: 200px;
+}
+
+.note_query_input input {
+    transition: all 0.5s ease;
+    width: 100%;
+    font-size: 70px;
+    border: none;
+    color: #606060;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    outline: none;
+    resize: none;
+}
+
+.note_query_body {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+}
+
+.note_query_box {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 460px;
+    flex-basis: 460px;
+    border-right: 2px solid #ccc;
+    height: 803px;
+    padding: 40px 0px;
+
+}
+
+.note_query_list {
+    width: 100%;
+    height: 1000px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.note_query_list_node {
+    box-sizing: border-box;
+    width: 100%;
+    height: 215px;
+    padding: 20px 20px;
+}
+
+.note_query_list_node .title {
+    font-family: '黑体 Regular';
+    font-size: 21px;
+    color: #4a4a4a;
+}
+
+.note_query_list_node .text {
+    width: 100%;
+    height: 55px;
+    line-height: 18px;
+    overflow: hidden;
+    color: #3c3c3c;
+    font-size: 14px;
+}
+
+.note_query_list_node .border {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #672b00;
+}
+
+.query_note_right {
+    flex: 5;
+    width: 100%;
+}

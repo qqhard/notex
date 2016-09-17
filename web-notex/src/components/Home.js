@@ -226,9 +226,8 @@ let eve = {
         $('#J_SearchInput').keydown(function(ev) {
             var ev=ev||window.event;
             if(ev.keyCode === 13) {
-                console.log(props.user);
-                console.log(ev.target.value);
-                props.searchNote(props.user.userId,ev.target.value);
+                console.log(localStorage.getItem('user_id'));
+                props.searchNote(localStorage.getItem('user_id'),ev.target.value);
                 $('#J_SearchInput').removeClass('block');
                 $('#J_SearchInput').addClass('none');
             }

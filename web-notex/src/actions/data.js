@@ -94,7 +94,8 @@ export const searchNote = (userId,text) => {
         $.get(urls.SEARCH_NOTE(userId, text),function (data) {
             dispatch({
                 type: types.SEARCH_NOTE_SUCCESS,
-                notes: data
+                notes: data,
+                query: text,
             });
         });
     }

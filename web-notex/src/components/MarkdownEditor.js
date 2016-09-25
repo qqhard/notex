@@ -1,17 +1,10 @@
 /**
- * Created by hard on 16-8-31.
+ * Created by hard on 16-9-25.
  */
+
 import React from 'react';
 import TagInput from './TagInput';
-import './../styles/dark.css';
-import './../styles/defaultStyle.css';
-import './../styles/NoteEditor.css';
-import './../styles/reactTags.css';
-import Navigation from './Navigation';
-import Modal from './Modal';
 import {styles} from '../styles/styles';
-
-
 
 const MODE = {
     EDIT: 0,
@@ -21,7 +14,7 @@ const MODE = {
     }
 }
 
-class NoteEditor extends React.Component {
+class MarkdownEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,9 +25,6 @@ class NoteEditor extends React.Component {
     }
 
     componentDidMount() {
-        var {getNote} = this.props;
-        var {noteId} = this.props.params;
-        getNote(noteId);
         let _this = this;
         this.editor = editormd("editormd", {
             path: "/bower_components/editor.md/lib/",
@@ -60,8 +50,22 @@ class NoteEditor extends React.Component {
                 };
                 this.addKeyMap(keyMap);
                 this.previewed();
-            }
+            },
+            markdown: this.props.note.text,
         });
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.note.noteId != nextProps.note.noteId ){
+            if(!!this.editor)this.editor.setMarkdown(nextProps.note.text);
+        }
+    }
+
+
+    noteText() {
+        var {note} = this.props;
+        if (!!note)return note.text;
+        return '';
     }
 
     noteHtml() {
@@ -107,7 +111,6 @@ class NoteEditor extends React.Component {
         this.setState({
             mode: MODE.change(this.state.mode)
         })
-        // this.editor.previewing(); //只显示html
     }
 
     handleSave() {
@@ -142,48 +145,39 @@ class NoteEditor extends React.Component {
         this.setState({open:true});
     }
 
-    render() {
+    render(){
 
         return (
-            <div className='box'>
-                <Navigation />
-                <Modal open={this.state.open} onCancel={()=>this.setState({open:false})}>
-                    <span className="iconfont icon-xiao10"></span>
-                    <p className="note_editor_modal_tip">删除笔记</p>
-                    <p className="note_editor_modal_msg">确定是否删除{this.noteTitle()}？</p>
-                </Modal>
-                <div className='content'>
-                    <div className="note_editor_head">
-                        <input className='note_editor_title' value={this.noteTitle()}
-                               onChange={this.handleChangeTitle.bind(this)}/>
-                        <div className="note_editor_neck">
-                            <div className="note_editor_tags">
-                                <TagInput
-                                    tags={!!this.props.note?this.props.note.tags:''}
-                                    addTag={this.props.addTag}
-                                    removeTag={this.props.removeTag}
-                                />
-                            </div>
-                            <div className="note_editor_utils">
-
+            <div className="note_editor">
+                <div className="note_editor_head">
+                    <input className='note_editor_title' value={this.noteTitle()}
+                           onChange={this.handleChangeTitle.bind(this)}/>
+                    <div className="note_editor_neck">
+                        <div className="note_editor_tags">
+                            <TagInput
+                                tags={!!this.props.note?this.props.note.tags:''}
+                                addTag={this.props.addTag}
+                                removeTag={this.props.removeTag}
+                            />
+                        </div>
+                        <div className="note_editor_utils">
                                 <span className="note_editor_util iconfont icon-yulan" style={this.yulanStyle()}
                                       onClick={this.handleModeChange.bind(this)}></span>
                                 <span className="note_editor_util iconfont icon-baocun" style={this.saveStyle()}
                                       onClick={this.handleSave.bind(this)}></span>
                                 <span className="note_editor_util iconfont icon-xiao10"
                                       onClick={this.openModal.bind(this)}></span>
-                            </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div id="editormd" key="editormd">
-                        <textarea style={{display: 'none'}} value={this.noteText()}></textarea>
-                    </div>
                 </div>
-
+                <div id="editormd" key="editormd">
+                    <textarea style={{display: 'none'}} ></textarea>
+                </div>
             </div>
-        )
+        );
     }
+
 }
 
-export default NoteEditor;
+export default MarkdownEditor;

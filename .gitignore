@@ -18,4 +18,4 @@ chrome-notexV2/background.js.map
 chrome-notexV2/page.js.map
 chrome-notexV2/popup.js.map
 web-notex/.env
-
+server-notex/data/

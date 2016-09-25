@@ -8,20 +8,30 @@ import NoteNode from './NoteNode';
 
 class NoteList extends React.Component {
 
-    mock(){
+    mock() {
         let notes = [];
-        for(let i=0;i<20;i++){
+        for (let i = 0; i < 20; i++) {
             notes.push(
-                <NoteNode title="test" text="testtesttest"/>
+                <NoteNode key={i} title="test" text="testtesttest"/>
             );
         }
         return notes;
     }
 
-    render(){
+    notes() {
+        let notes = [];
+        notes = this.props.notes.map((val, index)=> {
+            return (
+                <NoteNode key={index} note={val} getNote={this.props.getNote}/>
+            );
+        });
+        return notes;
+    }
+
+    render() {
         return (
             <div className="note_query_list">
-                {this.mock()}
+                {this.notes()}
             </div>
         );
     }

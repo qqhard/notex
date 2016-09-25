@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.crazy.model.Note;
 import org.crazy.model.Query;
-import org.crazy.sevice.SearchService;
+import org.crazy.sevice.OpenSearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class TestSearchService {
 	@Autowired
-	private SearchService ss;
+	private OpenSearchService ss;
 	@Test
 	public void testPushNote(){
 		Note note = new Note();

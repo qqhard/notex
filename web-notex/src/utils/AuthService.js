@@ -27,7 +27,7 @@ export default class AuthService {
 
     _doAuthentication(authResult){
         this.setToken(authResult.idToken);
-        localStorage.setItem('user_id', 'github|11865322');
+
         this.lock.getProfile(authResult.idToken, (error, profile) => {
             if (error) {
                 console.log('Error loading the Profile', error);
@@ -49,7 +49,8 @@ export default class AuthService {
     }
 
     setProfile(profile){
-        // Saves profile data to localStorage
+        profile.user_id = profile.user_id.replace('\|','');
+        localStorage.setItem('user_id', profile.user_id);
         localStorage.setItem('profile', JSON.stringify(profile))
     }
 

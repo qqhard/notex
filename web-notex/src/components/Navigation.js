@@ -3,24 +3,8 @@
  */
 
 import React from 'react';
-
-let styles = {
-    height: {
-        height: document.documentElement.clientHeight || document.body.clientHeight + 'px'
-    },
-    heights: {
-        height: (document.documentElement.clientHeight || document.body.clientHeight) - 100 + 'px'
-    },
-    grey: {
-        color: '#646464'
-    },
-    green: {
-        color: '#2dbe60'
-    },
-    red: {
-        color: 'red'
-    }
-}
+import { hashHistory } from 'react-router';
+import {styles} from '../styles/styles';
 
 class Navigation extends React.Component {
     render() {
@@ -29,7 +13,7 @@ class Navigation extends React.Component {
                 <input type='hidden' id='J_AAC' defaultValue='0'/>
                 <div className='menu' style={styles.height}>
                     <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png'/>
-                    <span className="iconfont icon-sousuo"></span>
+                    <span className="iconfont icon-sousuo" onClick={()=>{hashHistory.push('/query.html')}}></span>
                 </div>
             </div>
 

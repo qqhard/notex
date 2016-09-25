@@ -4,9 +4,9 @@
 import React from 'react';
 import './../styles/dark.css';
 import './../styles/defaultStyle.css';
-import marked from 'marked';
 import './../styles/NoteShow.css';
 import {hashHistory} from 'react-router';
+import Navigation from './Navigation';
 
 let styles = {
     height: {
@@ -64,10 +64,7 @@ class NoteShow extends React.Component {
 
         return (
             <div className='box'>
-                <input type='hidden' id='J_AAC' defaultValue='0'/>
-                <div className='menu' style={styles.height}>
-                    <img className='logo' src='https://img.alicdn.com/tps/TB1kxcvMVXXXXaPaXXXXXXXXXXX-206-207.png'/>
-                </div>
+                <Navigation />
                 <div className='content'>
                     <div className="note_show_head">
                         <div className='note_show_title'>{this.noteTitle()}</div>

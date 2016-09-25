@@ -1,7 +1,9 @@
 package org.crazy.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
+@Document(indexName = "note", type = "note", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Note {
 	@Id
 	private String noteId;
